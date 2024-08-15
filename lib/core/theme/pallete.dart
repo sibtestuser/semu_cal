@@ -7,9 +7,9 @@ class Pallete {
   static const whiteColor = Colors.white;
   static var redColor = Colors.red.shade500;
   static var blueColor = Colors.blue.shade300;
-  static var darkGreyColor = Colors.grey.shade800;
+  static var darkGreyColor = Colors.grey.shade900;
   static var lightGreyColor = Colors.grey.shade400;
-  static var verylightGreyColor = Colors.grey.shade100;
+  static var verylightGreyColor = Colors.grey.shade200;
   static var metalgreyColor = Colors.grey.shade500;
   static var pastelyellowColor = Colors.yellow.shade100;
   static var pastelredColor = Colors.red.shade300;
@@ -24,7 +24,7 @@ class Pallete {
         color: whiteColor,
       ),
     ),
-    
+
     // backgroundColor: drawerColor, // will be used as alternative background color
   );
 
@@ -38,7 +38,7 @@ class Pallete {
         color: blackColor,
       ),
     ),
-    
+
     //backgroundColor: whiteColor,
   );
 }
