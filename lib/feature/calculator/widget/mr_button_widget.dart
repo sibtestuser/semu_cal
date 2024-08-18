@@ -7,25 +7,25 @@ import 'package:semu_cal/core/theme/pallete.dart';
 import 'package:semu_cal/core/theme/texttheme.dart';
 import 'package:semu_cal/feature/calculator/controller/calculate_controller.dart';
 import 'package:semu_cal/feature/calculator/controller/display_controller.dart';
-import 'package:semu_cal/util/utils.dart';
 
 class MRButtonWidget extends ConsumerStatefulWidget {
   final functionEnum value;
-  const MRButtonWidget({Key? key, required this.value}) : super(key: key);
+  const MRButtonWidget({super.key, required this.value});
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
       _PortalFunctionButtonWidgetState();
 }
 
 class _PortalFunctionButtonWidgetState extends ConsumerState<MRButtonWidget> {
-  bool _isPortalVisible = true;
-
   @override
   Widget build(BuildContext context) {
     final functionEnum value = widget.value;
     final memoryList = ref.watch(displayControllerProvider).memory;
     final isVisible = ref.watch(displayControllerProvider).memory.isNotEmpty;
     final listLength = memoryList.length > 3 ? 3 : memoryList.length;
+    final width = MediaQuery.of(context).size.width;
+    bool isTouched =
+        ref.watch(displayControllerProvider).touchedButton == value.type;
 
     return Expanded(
       child: Portal(
@@ -59,7 +59,7 @@ class _PortalFunctionButtonWidgetState extends ConsumerState<MRButtonWidget> {
                         memoryList[i].toString().length > 8
                             ? 8
                             : memoryList[i].toString().length),
-                    style: CustomTextTheme.displayPopupwhite,
+                    style: CustomTextTheme.getPupupTextWhite(context),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -68,21 +68,24 @@ class _PortalFunctionButtonWidgetState extends ConsumerState<MRButtonWidget> {
           ),
           child: GestureDetector(
             onTap: () {
-              print('키 눌렸음');
               ref.read(calculatorControllerProvider.notifier).makeMRResult();
+              ref
+                  .read(displayControllerProvider.notifier)
+                  .setTouchButton(value.type);
             },
-            child: Container(
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
               padding: const EdgeInsets.symmetric(
                   vertical: Constants.caculatorButtonVerticalPadding),
               margin: const EdgeInsets.all(3),
               decoration: BoxDecoration(
-                color: Pallete.lightGreyColor,
+                color: isTouched ? Colors.yellow[900] : Pallete.lightGreyColor,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Center(
                 child: Text(
                   value.type,
-                  style: CustomTextTheme.buttonTextBlack,
+                  style: CustomTextTheme.getButtonTextStyle(context),
                 ),
               ),
             ),

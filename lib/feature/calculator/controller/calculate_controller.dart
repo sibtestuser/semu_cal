@@ -154,8 +154,6 @@ class CalculateController extends StateNotifier<Calmodel> {
       _displaaycontroller.addMemoryList(tempResult * -1, context);
       readyNewCalculate();
     }
-
-    print('currentMemory: ${state.currentMemory}');
   }
 
   void makeResult() {
@@ -194,6 +192,7 @@ class CalculateController extends StateNotifier<Calmodel> {
   void makeGTResult() {
     _displaaycontroller.updateOutput(state.gt.toString());
   }
+
   void makeReset() {
     state = Calmodel();
     _displaaycontroller.makeReset();

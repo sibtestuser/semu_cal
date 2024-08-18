@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:semu_cal/core/constants/constants.dart';
+
 import 'package:semu_cal/core/enum/enum.dart';
 import 'package:semu_cal/core/theme/pallete.dart';
 import 'package:semu_cal/core/theme/texttheme.dart';
@@ -11,6 +11,8 @@ class DisplayOutputWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final width = MediaQuery.of(context).size.width;
+    print(width);
     final display = ref.watch(displayControllerProvider);
     String _output = '0';
     _output = ref.watch(displayControllerProvider).displyOutput;
@@ -39,70 +41,83 @@ class DisplayOutputWidget extends ConsumerWidget {
           ),
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          display.memory.isEmpty ? '' : 'M',
-                          style: CustomTextTheme.displayExtraTextBlack,
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          display.gt.isEmpty ? '' : 'GT',
-                          style: CustomTextTheme.displayExtraTextBlack,
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          display.kShow == operationEnum.none
-                              ? ''
-                              : 'K (${display.kShow.type})',
-                          style: CustomTextTheme.displayExtraTextBlack,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          display.operation == operationEnum.divide ? '÷' : '',
-                          style: CustomTextTheme.displayExtraTextBlack,
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          display.operation == operationEnum.multiply
-                              ? 'X'
-                              : '',
-                          style: CustomTextTheme.displayExtraTextBlack,
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          display.operation == operationEnum.minus ? '-' : '',
-                          style: CustomTextTheme.displayExtraTextBlack,
-                        ),
-                        const SizedBox(
-                          width: 3,
-                        ),
-                        Text(
-                          display.operation == operationEnum.plus ? '+' : '',
-                          style: CustomTextTheme.displayExtraTextBlack,
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                      ],
-                    ),
-                  ],
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            display.memory.isEmpty ? '' : 'M',
+                            style: CustomTextTheme.getExtraOutPutTextStyle(
+                                context),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            display.gt.isEmpty ? '' : 'GT',
+                            style: CustomTextTheme.getExtraOutPutTextStyle(
+                                context),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            display.kShow == operationEnum.none
+                                ? ''
+                                : 'K (${display.kShow.type})',
+                            style: CustomTextTheme.getExtraOutPutTextStyle(
+                                context),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            display.operation == operationEnum.divide
+                                ? '÷'
+                                : '',
+                            style: CustomTextTheme.getExtraOutPutTextStyle(
+                                context),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            display.operation == operationEnum.multiply
+                                ? 'X'
+                                : '',
+                            style: CustomTextTheme.getExtraOutPutTextStyle(
+                                context),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            display.operation == operationEnum.minus ? '-' : '',
+                            style: CustomTextTheme.getExtraOutPutTextStyle(
+                                context),
+                          ),
+                          const SizedBox(
+                            width: 3,
+                          ),
+                          Text(
+                            display.operation == operationEnum.plus ? '+' : '',
+                            style: CustomTextTheme.getExtraOutPutTextStyle(
+                                context),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Align(
@@ -111,7 +126,7 @@ class DisplayOutputWidget extends ConsumerWidget {
                   padding: const EdgeInsets.only(right: 8.0),
                   child: Text(
                     _output,
-                    style: CustomTextTheme.displayTextBlack,
+                    style: CustomTextTheme.getOutPutTextStyle(context),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),

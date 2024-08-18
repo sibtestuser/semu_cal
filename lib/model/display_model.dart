@@ -1,8 +1,3 @@
-import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
-
 import 'package:semu_cal/core/enum/enum.dart';
 
 class DisplayModel {
@@ -11,12 +6,14 @@ class DisplayModel {
   List<double> gt = [];
   operationEnum operation = operationEnum.none;
   operationEnum kShow = operationEnum.none;
+  String touchedButton = '';
   DisplayModel({
     this.displyOutput = '0',
     this.memory = const [],
     this.gt = const [],
     this.operation = operationEnum.none,
     this.kShow = operationEnum.none,
+    this.touchedButton = '',
   });
 
   DisplayModel copyWith({
@@ -25,6 +22,7 @@ class DisplayModel {
     List<double>? gt,
     operationEnum? operation,
     operationEnum? kShow,
+    String? touchedButton,
   }) {
     return DisplayModel(
       displyOutput: displyOutput ?? this.displyOutput,
@@ -32,6 +30,7 @@ class DisplayModel {
       gt: gt ?? this.gt,
       operation: operation ?? this.operation,
       kShow: kShow ?? this.kShow,
+      touchedButton: touchedButton ?? this.touchedButton,
     );
   }
 }

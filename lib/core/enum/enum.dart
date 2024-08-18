@@ -23,3 +23,30 @@ enum functionEnum {
   final String type;
   const functionEnum(this.type);
 }
+
+enum ClassEnum {
+  none('none'),
+  memory('memory'),
+  gt('gt'),
+  k('k');
+
+  final String type;
+  const ClassEnum(this.type);
+}
+
+enum TestEnum {
+  none('none'),
+  basic('basic'),
+  advanced('advanced');
+
+  final String type;
+  const TestEnum(this.type);
+}
+
+enum ThemeEnum {
+  light('light'),
+  dark('dark');
+
+  final String type;
+  const ThemeEnum(this.type);
+}

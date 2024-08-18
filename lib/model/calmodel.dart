@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:semu_cal/core/enum/enum.dart';
 
 class Calmodel {

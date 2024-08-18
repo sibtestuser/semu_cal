@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:semu_cal/core/enum/enum.dart';
-import 'package:semu_cal/feature/calculator/controller/calculate_controller.dart';
+
 import 'package:semu_cal/model/display_model.dart';
 import 'package:semu_cal/util/utils.dart';
 
@@ -29,6 +29,12 @@ class DisplayController extends StateNotifier<DisplayModel> {
     );
   }
 
+  void updateTempOutput(String value) {
+    state = state.copyWith(
+      displyOutput: value,
+    );
+  }
+
   void resetOutput() {
     state = state.copyWith(
       displyOutput: '0',
@@ -48,7 +54,7 @@ class DisplayController extends StateNotifier<DisplayModel> {
   void addGTList(double value) {
     double roundedValue = double.parse(value.toStringAsFixed(1));
     state = state.copyWith(
-      gt: [...state.gt, value],
+      gt: [...state.gt, roundedValue],
     );
   }
 
@@ -72,5 +78,18 @@ class DisplayController extends StateNotifier<DisplayModel> {
     state = state.copyWith(
       kShow: value,
     );
+  }
+
+  void setTouchButton(String value, {int duration = 200}) {
+    state = state.copyWith(
+      touchedButton: value,
+    );
+    //  print('touchedButton: ${state.touchedButton}');
+    Future.delayed(Duration(milliseconds: duration), () {
+      state = state.copyWith(
+        touchedButton: '',
+      );
+      print('touchedButton: ${state.touchedButton}');
+    });
   }
 }

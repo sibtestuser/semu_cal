@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class Responsive extends StatelessWidget {
@@ -9,8 +8,9 @@ class Responsive extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: ConstrainedBox(
-        constraints: BoxConstraints(
-          maxWidth: 600,
+        constraints: const BoxConstraints(
+          maxWidth: 800,
+          maxHeight: 1200,
         ),
         child: child,
       ),

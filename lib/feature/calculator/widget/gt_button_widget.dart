@@ -7,7 +7,6 @@ import 'package:semu_cal/core/theme/pallete.dart';
 import 'package:semu_cal/core/theme/texttheme.dart';
 import 'package:semu_cal/feature/calculator/controller/calculate_controller.dart';
 import 'package:semu_cal/feature/calculator/controller/display_controller.dart';
-import 'package:semu_cal/util/utils.dart';
 
 class GTButtonWidget extends ConsumerStatefulWidget {
   final functionEnum value;
@@ -22,10 +21,13 @@ class _PortalFunctionButtonWidgetState extends ConsumerState<GTButtonWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     final functionEnum value = widget.value;
     final memoryList = ref.watch(displayControllerProvider).gt;
     final isVisible = ref.watch(displayControllerProvider).gt.isNotEmpty;
     final listLength = memoryList.length > 3 ? 3 : memoryList.length;
+    bool isTouched =
+        ref.watch(displayControllerProvider).touchedButton == value.type;
 
     return Expanded(
       child: Portal(
@@ -37,9 +39,9 @@ class _PortalFunctionButtonWidgetState extends ConsumerState<GTButtonWidget> {
           ),
           portalFollower: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
-            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2),
+            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 1),
             decoration: BoxDecoration(
-              color: isVisible ? Colors.red[300] : Colors.transparent,
+              color: isVisible ? Colors.blue[500] : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
               boxShadow: const [
                 BoxShadow(
@@ -59,7 +61,7 @@ class _PortalFunctionButtonWidgetState extends ConsumerState<GTButtonWidget> {
                         memoryList[i].toString().length > 8
                             ? 8
                             : memoryList[i].toString().length),
-                    style: CustomTextTheme.displayPopupwhite,
+                    style: CustomTextTheme.getGTPupupTextWhite(context),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -69,19 +71,23 @@ class _PortalFunctionButtonWidgetState extends ConsumerState<GTButtonWidget> {
           child: GestureDetector(
             onTap: () {
               ref.read(calculatorControllerProvider.notifier).makeGTResult();
+              ref
+                  .read(displayControllerProvider.notifier)
+                  .setTouchButton(value.type);
             },
-            child: Container(
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
               padding: const EdgeInsets.symmetric(
                   vertical: Constants.caculatorButtonVerticalPadding),
               margin: const EdgeInsets.all(3),
               decoration: BoxDecoration(
-                color: Pallete.lightGreyColor,
+                color: isTouched ? Colors.yellow[900] : Pallete.lightGreyColor,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Center(
                 child: Text(
                   value.type,
-                  style: CustomTextTheme.buttonTextBlack,
+                  style: CustomTextTheme.getButtonTextStyle(context),
                 ),
               ),
             ),
