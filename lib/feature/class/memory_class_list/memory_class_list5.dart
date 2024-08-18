@@ -7,14 +7,14 @@ import 'package:semu_cal/%08widgets/class_background_widget.dart';
 import 'package:semu_cal/feature/calculator/controller/display_controller.dart';
 import 'package:semu_cal/feature/class/controller/class_controller.dart';
 
-class MemoryClass_4 extends ConsumerStatefulWidget {
-  MemoryClass_4({super.key});
+class MemoryClass_5 extends ConsumerStatefulWidget {
+  MemoryClass_5({super.key});
 
   @override
-  ConsumerState<MemoryClass_4> createState() => _MemoryClass_4State();
+  ConsumerState<MemoryClass_5> createState() => _MemoryClass_5State();
 }
 
-class _MemoryClass_4State extends ConsumerState<MemoryClass_4> {
+class _MemoryClass_5State extends ConsumerState<MemoryClass_5> {
   bool startani = false;
   bool firstani = false;
   bool secondani = false;
@@ -71,7 +71,7 @@ class _MemoryClass_4State extends ConsumerState<MemoryClass_4> {
           ),
           AnimatedTextKit(
             animatedTexts: [
-              TypewriterAnimatedText('먼저 2x3 을 누른 후 '),
+              TypewriterAnimatedText('계산이 끝난 후 메모리에 저장된 결과를 보고 싶다면 '),
             ],
             pause: const Duration(milliseconds: 100),
             isRepeatingAnimation: false,

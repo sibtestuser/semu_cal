@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:semu_cal/core/enum/enum.dart';
+import 'package:semu_cal/core/theme/cal_theme.dart';
 import 'package:semu_cal/core/theme/texttheme.dart';
 import 'package:semu_cal/feature/calculator/controller/calculate_controller.dart';
 import 'package:semu_cal/feature/calculator/controller/display_controller.dart';
@@ -24,6 +25,13 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
   bool memoryMenuTab = false;
   bool gtMenuTab = false;
   bool kMenuTab = false;
+  void initState() {
+    super.initState();
+    // 상태 변경을 initState에서 수행
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(cal_Theme_Provider.notifier).changeTheme('white');
+    });
+  }
 
   void memoryMenuTabChange() {
     setState(() {
@@ -169,7 +177,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                         elevation: 10,
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 200),
-                          height: memoryMenuTab ? 120.0 : 100.0,
+                          height: memoryMenuTab ? 100.0 : 80.0,
                           child: ListTile(
                             leading: const Icon(
                               CupertinoIcons
@@ -195,7 +203,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                       ),
                       if (memoryMenuTab)
                         Padding(
-                          padding: const EdgeInsets.only(left: 20.0, top: 10),
+                          padding: const EdgeInsets.only(left: 20.0, top: 5),
                           child: FadeIn(
                             animate: memoryMenuTab,
                             child: Card(
@@ -229,7 +237,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                         ),
                       if (memoryMenuTab)
                         Padding(
-                          padding: const EdgeInsets.only(left: 20.0, top: 10),
+                          padding: const EdgeInsets.only(left: 20.0, top: 5),
                           child: FadeInRight(
                             animate: memoryMenuTab,
                             duration: const Duration(milliseconds: 300),
@@ -267,7 +275,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                         ),
                       if (memoryMenuTab)
                         Padding(
-                          padding: const EdgeInsets.only(left: 20.0, top: 10),
+                          padding: const EdgeInsets.only(left: 20.0, top: 5),
                           child: FadeInRight(
                             animate: memoryMenuTab,
                             duration: const Duration(milliseconds: 300),
@@ -317,7 +325,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                         elevation: 10,
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 200),
-                          height: gtMenuTab ? 120.0 : 100.0,
+                          height: gtMenuTab ? 100.0 : 80.0,
                           child: ListTile(
                             leading: const Icon(
                               CupertinoIcons
@@ -343,7 +351,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                       ),
                       if (gtMenuTab)
                         Padding(
-                          padding: const EdgeInsets.only(left: 20.0, top: 10),
+                          padding: const EdgeInsets.only(left: 20.0, top: 5),
                           child: FadeIn(
                             animate: gtMenuTab,
                             child: Card(
@@ -377,7 +385,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                         ),
                       if (gtMenuTab)
                         Padding(
-                          padding: const EdgeInsets.only(left: 20.0, top: 10),
+                          padding: const EdgeInsets.only(left: 20.0, top: 5),
                           child: FadeInRight(
                             animate: gtMenuTab,
                             duration: const Duration(milliseconds: 300),
@@ -415,7 +423,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                         ),
                       if (gtMenuTab)
                         Padding(
-                          padding: const EdgeInsets.only(left: 20.0, top: 10),
+                          padding: const EdgeInsets.only(left: 20.0, top: 5),
                           child: FadeInRight(
                             animate: gtMenuTab,
                             duration: const Duration(milliseconds: 300),
@@ -465,7 +473,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                         elevation: 10,
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 200),
-                          height: kMenuTab ? 120.0 : 100.0,
+                          height: kMenuTab ? 100.0 : 80.0,
                           child: ListTile(
                             leading: const Icon(
                               CupertinoIcons
@@ -491,7 +499,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                       ),
                       if (kMenuTab)
                         Padding(
-                          padding: const EdgeInsets.only(left: 20.0, top: 10),
+                          padding: const EdgeInsets.only(left: 20.0, top: 5),
                           child: FadeIn(
                             animate: kMenuTab,
                             child: Card(
@@ -525,7 +533,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                         ),
                       if (kMenuTab)
                         Padding(
-                          padding: const EdgeInsets.only(left: 20.0, top: 10),
+                          padding: const EdgeInsets.only(left: 20.0, top: 5),
                           child: FadeInRight(
                             animate: kMenuTab,
                             duration: const Duration(milliseconds: 300),
@@ -563,7 +571,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                         ),
                       if (kMenuTab)
                         Padding(
-                          padding: const EdgeInsets.only(left: 20.0, top: 10),
+                          padding: const EdgeInsets.only(left: 20.0, top: 5),
                           child: FadeInRight(
                             animate: kMenuTab,
                             duration: const Duration(milliseconds: 300),

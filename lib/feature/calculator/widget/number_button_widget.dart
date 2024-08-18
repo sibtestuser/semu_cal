@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:semu_cal/core/constants/constants.dart';
+import 'package:semu_cal/core/theme/cal_theme.dart';
 import 'package:semu_cal/core/theme/pallete.dart';
 import 'package:semu_cal/core/theme/texttheme.dart';
 import 'package:semu_cal/feature/calculator/controller/calculate_controller.dart';
@@ -12,7 +13,7 @@ class NumberButtonWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final width = MediaQuery.of(context).size.width;
+    CalTheme calTheme = ref.watch(cal_Theme_Provider);
     bool isTouched =
         ref.watch(displayControllerProvider).touchedButton == value;
     return Expanded(
@@ -24,19 +25,27 @@ class NumberButtonWidget extends ConsumerWidget {
 
           ref.read(displayControllerProvider.notifier).setTouchButton(value);
         },
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          padding: const EdgeInsets.symmetric(
-              vertical: Constants.caculatorButtonVerticalPadding),
-          margin: const EdgeInsets.all(3),
-          decoration: BoxDecoration(
-            color: isTouched ? Colors.yellow[900] : Pallete.blackColor,
+        child: Padding(
+          padding: const EdgeInsets.all(3.0),
+          child: Material(
+            elevation: isTouched ? 8 : 5,
             borderRadius: BorderRadius.circular(8),
-          ),
-          child: Center(
-            child: Text(
-              value,
-              style: CustomTextTheme.getButtonWhiteTextStyle(context),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              padding: const EdgeInsets.symmetric(
+                  vertical: Constants.caculatorButtonVerticalPadding),
+              decoration: BoxDecoration(
+                color: isTouched
+                    ? Colors.yellow[900]
+                    : calTheme.number_button_color,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Center(
+                child: Text(
+                  value,
+                  style: calTheme.getNumberButtonTextStyle(context),
+                ),
+              ),
             ),
           ),
         ),

@@ -50,3 +50,21 @@ enum ThemeEnum {
   final String type;
   const ThemeEnum(this.type);
 }
+
+enum Cal_Theme_Enum {
+  white('white'),
+  pink('pink'),
+  grey('grey');
+
+  final String type;
+  const Cal_Theme_Enum(this.type);
+}
+
+enum Board_Theme_Enum {
+  white('white'),
+  pink('green'),
+  grey('grey');
+
+  final String type;
+  const Board_Theme_Enum(this.type);
+}

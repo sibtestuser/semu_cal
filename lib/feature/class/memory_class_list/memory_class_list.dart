@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,6 +18,22 @@ class _MemoryClass_1State extends ConsumerState<MemoryClass_1> {
   bool firstani = false;
   bool secondani = false;
   bool thirdani = false;
+  List<Timer> _timers = [];
+  @override
+  void dispose() {
+    for (var timer in _timers) {
+      timer.cancel();
+    }
+    super.dispose();
+  }
+
+  void _startTimer(Duration duration, VoidCallback callback) {
+    _timers.add(Timer(duration, () {
+      if (mounted) {
+        callback();
+      }
+    }));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +45,7 @@ class _MemoryClass_1State extends ConsumerState<MemoryClass_1> {
             animatedTexts: [
               TypewriterAnimatedText('계산기에는 크게 2개의 메모리 공간이 있습니다'),
             ],
+            pause: const Duration(milliseconds: 100),
             isRepeatingAnimation: false,
             // totalRepeatCount: 1,
             onFinished: () {
@@ -41,15 +60,20 @@ class _MemoryClass_1State extends ConsumerState<MemoryClass_1> {
           if (firstani)
             AnimatedTextKit(
               animatedTexts: [
-                TypewriterAnimatedText('첫번째는 아래 계산기 M  영역이고'),
+                TypewriterAnimatedText(
+                  '첫번째는 계산기 M 영역이고',
+                ),
               ],
+              pause: const Duration(milliseconds: 100),
+
               isRepeatingAnimation: false,
               //  totalRepeatCount: 1,
               onFinished: () {
+                if (!mounted) return;
                 ref
                     .read(displayControllerProvider.notifier)
                     .setTouchButton('MR', duration: 5000);
-                Future.delayed(const Duration(milliseconds: 200), () {
+                _startTimer(const Duration(milliseconds: 200), () {
                   setState(() {
                     secondani = true;
                   });
@@ -64,9 +88,11 @@ class _MemoryClass_1State extends ConsumerState<MemoryClass_1> {
               animatedTexts: [
                 TypewriterAnimatedText('두번째는 계산기 GT 영역입니다'),
               ],
+              pause: const Duration(milliseconds: 100),
               isRepeatingAnimation: false,
               //  totalRepeatCount: 1,
               onFinished: () {
+                if (!mounted) return;
                 ref
                     .read(displayControllerProvider.notifier)
                     .setTouchButton('GT', duration: 5000);
@@ -86,6 +112,7 @@ class _MemoryClass_1State extends ConsumerState<MemoryClass_1> {
               isRepeatingAnimation: false,
               //  totalRepeatCount: 1,
               onFinished: () {
+                if (!mounted) return;
                 ref.read(classModelProvider.notifier).setNextPage(true);
               },
             ),

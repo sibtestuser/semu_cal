@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,6 +19,23 @@ class _MemoryClass_2State extends ConsumerState<MemoryClass_2> {
   bool firstani = false;
   bool secondani = false;
   bool thirdani = false;
+  List<Timer> _timers = [];
+  @override
+  void dispose() {
+    for (var timer in _timers) {
+      timer.cancel();
+    }
+
+    super.dispose();
+  }
+
+  void _startTimer(Duration duration, VoidCallback callback) {
+    _timers.add(Timer(duration, () {
+      if (mounted) {
+        callback();
+      }
+    }));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +47,7 @@ class _MemoryClass_2State extends ConsumerState<MemoryClass_2> {
             animatedTexts: [
               TypewriterAnimatedText('만약 메모리 기능 없이 아래의 계산을 한다면? '),
             ],
+            pause: const Duration(milliseconds: 100),
             isRepeatingAnimation: false,
             onFinished: () {
               setState(() {
@@ -64,6 +84,7 @@ class _MemoryClass_2State extends ConsumerState<MemoryClass_2> {
                           animatedTexts: [
                             TypewriterAnimatedText('2x3 = 6 을 노트에 적고'),
                           ],
+                          pause: const Duration(milliseconds: 100),
                           isRepeatingAnimation: false,
                           //  totalRepeatCount: 1,
                           onFinished: () {
@@ -80,6 +101,7 @@ class _MemoryClass_2State extends ConsumerState<MemoryClass_2> {
                           animatedTexts: [
                             TypewriterAnimatedText('4x5 = 20 을 노트에 적은 후'),
                           ],
+                          pause: const Duration(milliseconds: 100),
                           isRepeatingAnimation: false,
                           //  totalRepeatCount: 1,
                           onFinished: () {
@@ -94,9 +116,11 @@ class _MemoryClass_2State extends ConsumerState<MemoryClass_2> {
                           animatedTexts: [
                             TypewriterAnimatedText('6과 20을 다시 더해줍니다'),
                           ],
+                          pause: const Duration(milliseconds: 100),
                           isRepeatingAnimation: false,
                           //  totalRepeatCount: 1,
                           onFinished: () {
+                            if (!mounted) return;
                             setState(() {
                               thirdani = true;
                             });
@@ -111,14 +135,14 @@ class _MemoryClass_2State extends ConsumerState<MemoryClass_2> {
                 Expanded(
                   flex: 3, // Container의 비율을 2로 설정
                   child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 5), // 외부 여백
+                    margin: const EdgeInsets.symmetric(vertical: 5), // 외부 여백
                     decoration: BoxDecoration(
                       color: Colors.yellow[100], // 노트 배경색
                       border: Border.all(
                           color: Colors.brown, width: 2), // 테두리 색상 및 두께
                       borderRadius: BorderRadius.circular(8), // 모서리 둥글게
                     ),
-                    padding: EdgeInsets.all(8), // 내부 여백
+                    padding: const EdgeInsets.all(8), // 내부 여백
                     child: Center(
                       child: Column(
                         mainAxisAlignment:

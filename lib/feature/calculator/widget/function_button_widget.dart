@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:semu_cal/core/constants/constants.dart';
 import 'package:semu_cal/core/enum/enum.dart';
+import 'package:semu_cal/core/theme/cal_theme.dart';
 import 'package:semu_cal/core/theme/pallete.dart';
 import 'package:semu_cal/core/theme/texttheme.dart';
 import 'package:semu_cal/feature/calculator/controller/calculate_controller.dart';
@@ -12,6 +13,7 @@ class FunctionButtonWidget extends ConsumerWidget {
   const FunctionButtonWidget({super.key, required this.value});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    CalTheme calTheme = ref.watch(cal_Theme_Provider);
     final width = MediaQuery.of(context).size.width;
     bool isTouched =
         ref.watch(displayControllerProvider).touchedButton == value.type;
@@ -25,19 +27,28 @@ class FunctionButtonWidget extends ConsumerWidget {
               .read(displayControllerProvider.notifier)
               .setTouchButton(value.type);
         },
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          padding: const EdgeInsets.symmetric(
-              vertical: Constants.caculatorButtonVerticalPadding),
-          margin: const EdgeInsets.all(3),
-          decoration: BoxDecoration(
-            color: isTouched ? Colors.yellow[900] : Pallete.lightGreyColor,
+        child: Padding(
+          padding: const EdgeInsets.all(3.0),
+          child: Material(
+            elevation: isTouched ? 8 : 5,
             borderRadius: BorderRadius.circular(8),
-          ),
-          child: Center(
-            child: Text(
-              value.type,
-              style: CustomTextTheme.getButtonTextStyle(context),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              padding: const EdgeInsets.symmetric(
+                  vertical: Constants.caculatorButtonVerticalPadding),
+              // margin: const EdgeInsets.all(3),
+              decoration: BoxDecoration(
+                color: isTouched
+                    ? Colors.yellow[900]
+                    : calTheme.function_button_color,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Center(
+                child: Text(
+                  value.type,
+                  style: calTheme.getFuctionButtonTextStyle(context),
+                ),
+              ),
             ),
           ),
         ),
