@@ -31,6 +31,7 @@ class CalculatorThemeController extends StateNotifier<CalTheme> {
 }
 
 class CalTheme {
+  String get type => 'white';
   Color get topBackGroundColor => Colors.white;
   Color get bottomBackGroundColor => Colors.white;
   Color get number_button_color => Colors.grey[600]!;
@@ -59,6 +60,8 @@ class CalTheme {
 }
 
 class CalTheme_White extends CalTheme {
+  @override
+  String get type => 'white';
   @override
   Color get topBackGroundColor => Colors.grey[100]!;
   @override
@@ -97,9 +100,50 @@ class CalTheme_White extends CalTheme {
   }
 }
 
-class CalTheme_Pink extends CalTheme {}
+class CalTheme_Pink extends CalTheme {
+  @override
+  String get type => 'pink';
+  @override
+  Color get topBackGroundColor => Colors.grey[100]!;
+  @override
+  Color get bottomBackGroundColor => Colors.white;
+  @override
+  Color get number_button_color => Colors.grey[350]!;
+  @override
+  Color get operation_button_color => Colors.grey[200]!;
+  @override
+  Color get function_button_color => Colors.grey[200]!;
+  @override
+  TextStyle getOutputDisplayTextStyle(BuildContext context) {
+    return CustomTextTheme.getOutPutTextStyle(context);
+  }
+
+  @override
+  TextStyle getExtraOutPutTextStyle(BuildContext context) {
+    return CustomTextTheme.getExtraOutPutTextStyle(context);
+  }
+
+  @override
+  TextStyle getNumberButtonTextStyle(BuildContext context) {
+    return CustomTextTheme.getButtonTextStyle(context);
+  }
+
+  @override
+  TextStyle getOperationButtonTextStyle(BuildContext context) {
+    return CustomTextTheme.getButtonTextStyle(context)
+        .copyWith(color: Colors.blue[500]);
+  }
+
+  @override
+  TextStyle getFuctionButtonTextStyle(BuildContext context) {
+    return CustomTextTheme.getButtonTextStyle(context)
+        .copyWith(color: Colors.green[700]);
+  }
+}
 
 class CalTheme_Grey extends CalTheme {
+  @override
+  String get type => 'grey';
   @override
   Color get topBackGroundColor => Pallete.darkGreyColor;
   @override
@@ -133,6 +177,7 @@ class CalTheme_Grey extends CalTheme {
         .copyWith(color: Colors.white);
   }
 
+  @override
   TextStyle getFuctionButtonTextStyle(BuildContext context) {
     return CustomTextTheme.getButtonTextStyle(context)
         .copyWith(color: Colors.black);

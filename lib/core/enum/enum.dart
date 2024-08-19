@@ -68,3 +68,12 @@ enum Board_Theme_Enum {
   final String type;
   const Board_Theme_Enum(this.type);
 }
+
+enum Pen_Theme_Enum {
+  white('white'),
+  pink('yellow'),
+  grey('black');
+
+  final String type;
+  const Pen_Theme_Enum(this.type);
+}

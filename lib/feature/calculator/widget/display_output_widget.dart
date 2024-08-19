@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:semu_cal/core/enum/enum.dart';
 import 'package:semu_cal/core/theme/cal_theme.dart';
-import 'package:semu_cal/core/theme/pallete.dart';
-import 'package:semu_cal/core/theme/texttheme.dart';
 import 'package:semu_cal/feature/calculator/controller/display_controller.dart';
 
 class DisplayOutputWidget extends ConsumerWidget {
@@ -13,11 +11,11 @@ class DisplayOutputWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     CalTheme calTheme = ref.watch(cal_Theme_Provider);
-    final width = MediaQuery.of(context).size.width;
+
     //print(width);
     final display = ref.watch(displayControllerProvider);
-    String _output = '0';
-    _output = ref.watch(displayControllerProvider).displyOutput;
+    String output = '0';
+    output = ref.watch(displayControllerProvider).displyOutput;
     return Expanded(
       flex: 1,
       child: Material(
@@ -35,7 +33,7 @@ class DisplayOutputWidget extends ConsumerWidget {
           ),
           decoration: BoxDecoration(
             color: calTheme.topBackGroundColor,
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topRight: Radius.circular(8),
               topLeft: Radius.circular(8),
             ),
@@ -44,7 +42,7 @@ class DisplayOutputWidget extends ConsumerWidget {
                 color: Colors.black.withOpacity(0.5),
                 spreadRadius: 1,
                 blurRadius: 10,
-                offset: Offset(0, -5), // 그림자를 위쪽으로 이동
+                offset: const Offset(0, -5), // 그림자를 위쪽으로 이동
               ),
             ],
           ),
@@ -138,7 +136,7 @@ class DisplayOutputWidget extends ConsumerWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(right: 8.0),
                     child: Text(
-                      _output,
+                      output,
                       style: calTheme.getOutputDisplayTextStyle(context),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,

@@ -8,7 +8,7 @@ import 'package:semu_cal/feature/calculator/controller/display_controller.dart';
 import 'package:semu_cal/feature/class/controller/class_controller.dart';
 
 class MemoryClass_1 extends ConsumerStatefulWidget {
-  MemoryClass_1({super.key});
+  const MemoryClass_1({super.key});
 
   @override
   ConsumerState<MemoryClass_1> createState() => _MemoryClass_1State();
@@ -18,7 +18,7 @@ class _MemoryClass_1State extends ConsumerState<MemoryClass_1> {
   bool firstani = false;
   bool secondani = false;
   bool thirdani = false;
-  List<Timer> _timers = [];
+  final List<Timer> _timers = [];
   @override
   void dispose() {
     for (var timer in _timers) {
@@ -72,7 +72,7 @@ class _MemoryClass_1State extends ConsumerState<MemoryClass_1> {
                 if (!mounted) return;
                 ref
                     .read(displayControllerProvider.notifier)
-                    .setTouchButton('MR', duration: 5000);
+                    .setTouchButton('MR', duration: 3000);
                 _startTimer(const Duration(milliseconds: 200), () {
                   setState(() {
                     secondani = true;
@@ -95,7 +95,7 @@ class _MemoryClass_1State extends ConsumerState<MemoryClass_1> {
                 if (!mounted) return;
                 ref
                     .read(displayControllerProvider.notifier)
-                    .setTouchButton('GT', duration: 5000);
+                    .setTouchButton('GT', duration: 2000);
                 setState(() {
                   thirdani = true;
                 });

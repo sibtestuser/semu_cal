@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:semu_cal/core/constants/constants.dart';
 import 'package:semu_cal/core/enum/enum.dart';
 import 'package:semu_cal/core/theme/cal_theme.dart';
-import 'package:semu_cal/core/theme/pallete.dart';
-import 'package:semu_cal/core/theme/texttheme.dart';
 import 'package:semu_cal/feature/calculator/controller/calculate_controller.dart';
 import 'package:semu_cal/feature/calculator/controller/display_controller.dart';
 
@@ -14,7 +12,7 @@ class FunctionButtonWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     CalTheme calTheme = ref.watch(cal_Theme_Provider);
-    final width = MediaQuery.of(context).size.width;
+
     bool isTouched =
         ref.watch(displayControllerProvider).touchedButton == value.type;
     return Expanded(

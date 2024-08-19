@@ -8,7 +8,7 @@ import 'package:semu_cal/feature/calculator/controller/display_controller.dart';
 import 'package:semu_cal/feature/class/controller/class_controller.dart';
 
 class MemoryClass_5 extends ConsumerStatefulWidget {
-  MemoryClass_5({super.key});
+  const MemoryClass_5({super.key});
 
   @override
   ConsumerState<MemoryClass_5> createState() => _MemoryClass_5State();
@@ -20,8 +20,9 @@ class _MemoryClass_5State extends ConsumerState<MemoryClass_5> {
   bool secondani = false;
   bool thirdani = false;
   bool fourthani = false;
-  List<Timer> _timers = [];
+  final List<Timer> _timers = [];
 
+  @override
   initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -39,8 +40,8 @@ class _MemoryClass_5State extends ConsumerState<MemoryClass_5> {
     super.dispose();
   }
 
-  void _startTimer(Duration duration, VoidCallback callback) {
-    _timers.add(Timer(duration, () {
+  void _startTimer(int duration, VoidCallback callback) {
+    _timers.add(Timer(Duration(milliseconds: duration), () {
       if (mounted) {
         callback();
       }
@@ -53,87 +54,49 @@ class _MemoryClass_5State extends ConsumerState<MemoryClass_5> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            height: startani ? 30 : 0,
-            color: Colors.white, // 배경색을 하얀색으로 설정
-            child: startani
-                ? const Center(
-                    child: Text(
-                      '(2x3) + (4x5)',
-                      style: TextStyle(fontSize: 16, color: Colors.black),
-                    ),
-                  )
-                : null,
-          ),
-          const SizedBox(
-            height: 5,
-          ),
           AnimatedTextKit(
             animatedTexts: [
-              TypewriterAnimatedText('계산이 끝난 후 메모리에 저장된 결과를 보고 싶다면 '),
+              TypewriterAnimatedText('메모리에 저장된 연산들의 결과는'),
             ],
             pause: const Duration(milliseconds: 100),
             isRepeatingAnimation: false,
             // totalRepeatCount: 1,
             onFinished: () {
-              ref
-                  .read(displayControllerProvider.notifier)
-                  .setTouchButton('2', duration: 5000);
-              ref
-                  .read(displayControllerProvider.notifier)
-                  .updateTempOutput('2');
-              _startTimer(
-                const Duration(milliseconds: 500),
-                () {
-                  ref
-                      .read(displayControllerProvider.notifier)
-                      .setTouchButton('x', duration: 5000);
-                  ref
-                      .read(displayControllerProvider.notifier)
-                      .updateTempOutput('x');
-
-                  _startTimer(const Duration(milliseconds: 500), () {
-                    ref
-                        .read(displayControllerProvider.notifier)
-                        .setTouchButton('3', duration: 1000);
-                    ref
-                        .read(displayControllerProvider.notifier)
-                        .updateTempOutput('3');
-                    setState(() {
-                      firstani = true;
-                    });
-                  });
-                },
-              );
+              setState(() {
+                firstani = true;
+              });
             },
-          ),
-          const SizedBox(
-            height: 5,
           ),
           if (firstani)
             AnimatedTextKit(
               animatedTexts: [
-                TypewriterAnimatedText('더하기(양수) 연산이므로 M+ 버튼을 누르면'),
+                TypewriterAnimatedText('MR 버튼을 눌러 확인할 수 있습니다'),
               ],
               pause: const Duration(milliseconds: 100),
               isRepeatingAnimation: false,
               //  totalRepeatCount: 1,
               onFinished: () {
-                ref
-                    .read(displayControllerProvider.notifier)
-                    .setTouchButton('M+', duration: 2000);
-                ref
-                    .read(displayControllerProvider.notifier)
-                    .updateTempOutput('6');
-                ref
-                    .read(displayControllerProvider.notifier)
-                    .addMemoryList(6, context);
-                _startTimer(const Duration(milliseconds: 500), () {
-                  setState(() {
-                    secondani = true;
-                  });
-                });
+                _startTimer(
+                  100,
+                  () {
+                    ref
+                        .read(displayControllerProvider.notifier)
+                        .setTouchButton('MR', duration: 5000);
+
+                    ref
+                        .read(displayControllerProvider.notifier)
+                        .updateTempOutput('4');
+
+                    _startTimer(
+                      1000,
+                      () {
+                        setState(() {
+                          secondani = true;
+                        });
+                      },
+                    );
+                  },
+                );
               },
             ),
           const SizedBox(
@@ -142,7 +105,7 @@ class _MemoryClass_5State extends ConsumerState<MemoryClass_5> {
           if (secondani)
             AnimatedTextKit(
               animatedTexts: [
-                TypewriterAnimatedText('메모리 영역에 (+)6이 저장(메모) 됩니다.'),
+                TypewriterAnimatedText('저장된 +20 과 +6 연산의 결과값 26이 출력됩니다'),
               ],
               pause: const Duration(milliseconds: 1000),
               isRepeatingAnimation: false,
@@ -159,67 +122,18 @@ class _MemoryClass_5State extends ConsumerState<MemoryClass_5> {
           if (thirdani)
             AnimatedTextKit(
               animatedTexts: [
-                TypewriterAnimatedText('더하기 연산인 4x5 도 메모리에 더해주면'),
+                TypewriterAnimatedText('이어서 M- 연산도 연습해보겠습니다'),
               ],
               pause: const Duration(milliseconds: 100),
               isRepeatingAnimation: false,
               //  totalRepeatCount: 1,
               onFinished: () {
-                ref
-                    .read(displayControllerProvider.notifier)
-                    .setTouchButton('4', duration: 5000);
-                ref
-                    .read(displayControllerProvider.notifier)
-                    .updateTempOutput('4');
-
-                // 0.3초 후에 두 번째 연산을 실행
-                _startTimer(const Duration(milliseconds: 300), () {
-                  ref
-                      .read(displayControllerProvider.notifier)
-                      .setTouchButton('x', duration: 5000);
-                  ref
-                      .read(displayControllerProvider.notifier)
-                      .updateTempOutput('x');
-
-                  // 다시 0.3초 후에 세 번째 연산을 실행
-                  _startTimer(const Duration(milliseconds: 300), () {
-                    ref
-                        .read(displayControllerProvider.notifier)
-                        .setTouchButton('5', duration: 5000);
-                    ref
-                        .read(displayControllerProvider.notifier)
-                        .updateTempOutput('5');
-
-                    // 마지막으로 0.3초 후에 네 번째 연산을 실행
-                    _startTimer(const Duration(milliseconds: 300), () {
-                      ref
-                          .read(displayControllerProvider.notifier)
-                          .setTouchButton('M+', duration: 5000);
-                      ref
-                          .read(displayControllerProvider.notifier)
-                          .addMemoryList(20, context);
-                      ref
-                          .read(displayControllerProvider.notifier)
-                          .updateTempOutput('20');
-                      setState(() {
-                        fourthani = true;
-                      });
-                    });
-                  });
-                });
-              },
-            ),
-          const SizedBox(height: 5),
-          if (fourthani)
-            AnimatedTextKit(
-              animatedTexts: [
-                TypewriterAnimatedText('노트에 메모한 것과 동일한 값이 저장되었습니다'),
-              ],
-              pause: const Duration(milliseconds: 100),
-              isRepeatingAnimation: false,
-              //  totalRepeatCount: 1,
-              onFinished: () {
-                ref.read(classModelProvider.notifier).setNextPage(true);
+                _startTimer(
+                  100,
+                  () {
+                    ref.read(classModelProvider.notifier).setNextPage(true);
+                  },
+                );
               },
             ),
         ],

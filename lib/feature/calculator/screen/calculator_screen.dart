@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:semu_cal/core/constants/constants.dart';
-import 'package:semu_cal/core/theme/cal_theme.dart';
 import 'package:semu_cal/feature/calculator/controller/calculate_controller.dart';
 import 'package:semu_cal/feature/calculator/controller/display_controller.dart';
 
@@ -11,6 +10,8 @@ import 'package:semu_cal/feature/calculator/widget/display_output_widget.dart';
 import 'package:semu_cal/responsive/responsive.dart';
 
 class CalculatorWidget extends ConsumerStatefulWidget {
+  const CalculatorWidget({super.key});
+
   @override
   _CalculatorWidgetState createState() => _CalculatorWidgetState();
 }
@@ -44,18 +45,20 @@ class _CalculatorWidgetState extends ConsumerState<CalculatorWidget> {
   @override
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return SafeArea(
       child: Scaffold(
         body: Responsive(
           child: Padding(
-            padding: EdgeInsets.all(Constants.calculatorOutsidePadding),
+            padding: const EdgeInsets.all(Constants.calculatorOutsidePadding),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Expanded(
                   flex: 2,
-                  child: SizedBox(),
+                  child: Container(
+                    color: Colors.transparent,
+                  ),
                   // child: PageView(
                   //   children: <Widget>[
                   //     SingleChildScrollView(
@@ -80,9 +83,9 @@ class _CalculatorWidgetState extends ConsumerState<CalculatorWidget> {
                   //   ],
                   // ),
                 ),
-                DisplayOutputWidget(), //Expanded (flex: 1)
+                const DisplayOutputWidget(), //Expanded (flex: 1)
 
-                ButtonWidget(), //expanded (flex: 3)
+                const ButtonWidget(), //expanded (flex: 3)
               ],
             ),
           ),

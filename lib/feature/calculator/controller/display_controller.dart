@@ -13,12 +13,9 @@ final displayControllerProvider =
 });
 
 class DisplayController extends StateNotifier<DisplayModel> {
-  final Ref _ref;
-
   DisplayController({
     required Ref ref,
-  })  : _ref = ref,
-        super(DisplayModel());
+  }) : super(DisplayModel());
 
   void updateOutput(String value) {
     double parsedValue = double.parse(value);
@@ -89,7 +86,6 @@ class DisplayController extends StateNotifier<DisplayModel> {
       state = state.copyWith(
         touchedButton: '',
       );
-      print('touchedButton: ${state.touchedButton}');
     });
   }
 }

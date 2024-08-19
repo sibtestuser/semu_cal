@@ -4,14 +4,13 @@ import 'package:flutter_portal/flutter_portal.dart';
 import 'package:semu_cal/core/constants/constants.dart';
 import 'package:semu_cal/core/enum/enum.dart';
 import 'package:semu_cal/core/theme/cal_theme.dart';
-import 'package:semu_cal/core/theme/pallete.dart';
 import 'package:semu_cal/core/theme/texttheme.dart';
 import 'package:semu_cal/feature/calculator/controller/calculate_controller.dart';
 import 'package:semu_cal/feature/calculator/controller/display_controller.dart';
 
 class GTButtonWidget extends ConsumerStatefulWidget {
   final functionEnum value;
-  const GTButtonWidget({Key? key, required this.value}) : super(key: key);
+  const GTButtonWidget({super.key, required this.value});
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
       _PortalFunctionButtonWidgetState();

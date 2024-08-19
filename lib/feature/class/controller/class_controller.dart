@@ -10,12 +10,9 @@ final classModelProvider =
 });
 
 class ClassController extends StateNotifier<ClassModel> {
-  final Ref _ref;
-
   ClassController({
     required Ref ref,
-  })  : _ref = ref,
-        super(ClassModel());
+  }) : super(ClassModel());
 
   void setClassType(ClassEnum classtype) {
     state = state.copyWith(classtype: classtype);
@@ -34,7 +31,6 @@ class ClassController extends StateNotifier<ClassModel> {
         );
         break;
 
-        break;
       case ClassEnum.gt:
       // TODO: Handle this case.
       case ClassEnum.k:

@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:semu_cal/core/constants/constants.dart';
 import 'package:semu_cal/core/enum/enum.dart';
 import 'package:semu_cal/core/theme/cal_theme.dart';
-import 'package:semu_cal/core/theme/pallete.dart';
 import 'package:semu_cal/feature/calculator/widget/function_button_widget.dart';
 import 'package:semu_cal/feature/calculator/widget/gt_button_widget.dart';
 import 'package:semu_cal/feature/calculator/widget/mr_button_widget.dart';

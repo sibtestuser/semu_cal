@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:semu_cal/core/enum/enum.dart';
+
 import 'package:semu_cal/feature/calculator/screen/calculator_screen.dart';
-import 'package:semu_cal/feature/class/controller/class_controller.dart';
-import 'package:semu_cal/feature/class/screen/class_pageview.dart';
-import 'package:semu_cal/mainmenu.dart';
+
+import 'package:semu_cal/feature/test/controller/test_controller.dart';
+import 'package:semu_cal/feature/test/screen/test_page_view.dart';
 
 import 'package:semu_cal/responsive/responsive.dart';
 
@@ -14,33 +14,44 @@ class TestScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           '테스트',
         ),
         backgroundColor: Colors.blueGrey[100],
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            ref.read(testModelProvider.notifier).setNextPage(false);
+
+            Navigator.of(context).pop();
+          },
+        ),
       ),
       body: SafeArea(
         child: Responsive(
           child: Stack(
             children: [
+              const CalculatorWidget(),
               Align(
                 alignment: Alignment.topCenter,
                 child: Column(
                   children: [
-                    Expanded(
+                    const Expanded(
                       flex: 1,
-                      child: ClassMainPageView(),
+                      child: TestMainPageView(),
                     ),
                     Expanded(
                       flex: 2,
-                      child: Container(
-                        color: Colors.transparent,
+                      child: IgnorePointer(
+                        ignoring: true,
+                        child: Container(
+                          color: Colors.transparent,
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
-              CalculatorWidget(),
             ],
           ),
         ),

@@ -4,7 +4,6 @@ import 'package:flutter_portal/flutter_portal.dart';
 import 'package:semu_cal/core/constants/constants.dart';
 import 'package:semu_cal/core/enum/enum.dart';
 import 'package:semu_cal/core/theme/cal_theme.dart';
-import 'package:semu_cal/core/theme/pallete.dart';
 import 'package:semu_cal/core/theme/texttheme.dart';
 import 'package:semu_cal/feature/calculator/controller/calculate_controller.dart';
 import 'package:semu_cal/feature/calculator/controller/display_controller.dart';
@@ -25,7 +24,7 @@ class _PortalFunctionButtonWidgetState extends ConsumerState<MRButtonWidget> {
     final memoryList = ref.watch(displayControllerProvider).memory;
     final isVisible = ref.watch(displayControllerProvider).memory.isNotEmpty;
     final listLength = memoryList.length > 3 ? 3 : memoryList.length;
-    final width = MediaQuery.of(context).size.width;
+
     bool isTouched =
         ref.watch(displayControllerProvider).touchedButton == value.type;
 

@@ -8,7 +8,7 @@ import 'package:semu_cal/feature/calculator/controller/display_controller.dart';
 import 'package:semu_cal/feature/class/controller/class_controller.dart';
 
 class MemoryClass_4 extends ConsumerStatefulWidget {
-  MemoryClass_4({super.key});
+  const MemoryClass_4({super.key});
 
   @override
   ConsumerState<MemoryClass_4> createState() => _MemoryClass_4State();
@@ -20,8 +20,9 @@ class _MemoryClass_4State extends ConsumerState<MemoryClass_4> {
   bool secondani = false;
   bool thirdani = false;
   bool fourthani = false;
-  List<Timer> _timers = [];
+  final List<Timer> _timers = [];
 
+  @override
   initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {

@@ -4,7 +4,6 @@ import 'package:semu_cal/core/enum/enum.dart';
 import 'package:semu_cal/feature/calculator/screen/calculator_screen.dart';
 import 'package:semu_cal/feature/class/controller/class_controller.dart';
 import 'package:semu_cal/feature/class/screen/class_pageview.dart';
-import 'package:semu_cal/mainmenu.dart';
 
 import 'package:semu_cal/responsive/responsive.dart';
 
@@ -25,28 +24,32 @@ class ClassScreen extends ConsumerWidget {
         appbatTitle = 'K 알아보기';
         break;
       case ClassEnum.none:
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => MainMenuScreen(),
-          ),
-        );
+        appbatTitle = 'Class';
         break;
     }
     return Scaffold(
       appBar: AppBar(
         title: Text(appbatTitle),
         backgroundColor: Colors.blueGrey[100],
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            ref.read(classModelProvider.notifier).setNextPage(false);
+
+            Navigator.of(context).pop();
+          },
+        ),
       ),
       body: SafeArea(
         child: Responsive(
           child: Stack(
             children: [
-              CalculatorWidget(),
+              const CalculatorWidget(),
               Align(
                 alignment: Alignment.topCenter,
                 child: Column(
                   children: [
-                    Expanded(
+                    const Expanded(
                       flex: 1,
                       child: ClassMainPageView(),
                     ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:semu_cal/core/enum/enum.dart';
 
 //themeenum 은 추후에 provider 로
 class CustomTextTheme {

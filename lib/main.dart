@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:semu_cal/feature/calculator/screen/calculator_screen.dart';
 
-import 'package:semu_cal/feature/class/screen/class_screen.dart';
 import 'package:semu_cal/mainmenu.dart';
 
 void main() {
@@ -27,6 +25,6 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           fontFamily: 'NotoSansKR',
         ),
-        home: MainMenuScreen());
+        home: const MainMenuScreen());
   }
 }

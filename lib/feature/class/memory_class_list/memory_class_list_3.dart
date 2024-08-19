@@ -4,11 +4,10 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:semu_cal/%08widgets/class_background_widget.dart';
-import 'package:semu_cal/feature/calculator/controller/display_controller.dart';
 import 'package:semu_cal/feature/class/controller/class_controller.dart';
 
 class MemoryClass_3 extends ConsumerStatefulWidget {
-  MemoryClass_3({super.key});
+  const MemoryClass_3({super.key});
 
   @override
   ConsumerState<MemoryClass_3> createState() => _MemoryClass_3State();
@@ -18,7 +17,7 @@ class _MemoryClass_3State extends ConsumerState<MemoryClass_3> {
   bool firstani = false;
   bool secondani = false;
   bool thirdani = false;
-  List<Timer> _timers = [];
+  final List<Timer> _timers = [];
   @override
   void dispose() {
     for (var timer in _timers) {

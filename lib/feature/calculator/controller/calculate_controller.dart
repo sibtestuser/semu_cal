@@ -15,10 +15,9 @@ class CalculateController extends StateNotifier<Calmodel> {
   CalculateController({
     required Ref ref,
     required DisplayController displaycontroller,
-  })  : _ref = ref,
-        _displaaycontroller = displaycontroller,
+  })  : _displaaycontroller = displaycontroller,
         super(Calmodel());
-  final Ref _ref;
+
   final DisplayController _displaaycontroller;
   void numberButtonPressed(String value) {
     if (state.workingFirstOperand) {

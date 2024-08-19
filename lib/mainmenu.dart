@@ -1,15 +1,13 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:semu_cal/%08widgets/drawer.dart';
 import 'package:semu_cal/core/enum/enum.dart';
-import 'package:semu_cal/core/theme/cal_theme.dart';
 import 'package:semu_cal/core/theme/texttheme.dart';
 import 'package:semu_cal/feature/calculator/controller/calculate_controller.dart';
 import 'package:semu_cal/feature/calculator/controller/display_controller.dart';
-import 'package:semu_cal/feature/calculator/screen/calculator_screen.dart';
 import 'package:semu_cal/feature/class/controller/class_controller.dart';
 import 'package:semu_cal/feature/class/screen/class_screen.dart';
 import 'package:semu_cal/feature/test/screen/test_screen.dart';
@@ -25,12 +23,13 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
   bool memoryMenuTab = false;
   bool gtMenuTab = false;
   bool kMenuTab = false;
+  @override
   void initState() {
     super.initState();
-    // 상태 변경을 initState에서 수행
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(cal_Theme_Provider.notifier).changeTheme('white');
-    });
+    // // 상태 변경을 initState에서 수행
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   ref.read(cal_Theme_Provider.notifier).changeTheme('white');
+    // });
   }
 
   void memoryMenuTabChange() {
@@ -62,70 +61,6 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
     ref.read(calculatorControllerProvider.notifier).makeReset();
   }
 
-  Future<bool> _showExitConfirmationDialog(BuildContext context) async {
-    bool? shouldExit = false;
-    shouldExit = await showDialog<bool>(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-        title: const Text(
-          '앱 종료',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        content: const Text(
-          '학습을 마칠까요?',
-          style: TextStyle(
-            fontSize: 18,
-          ),
-        ),
-        actions: [
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).pop(false);
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            child: const Text(
-              '아니오',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-              ),
-            ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).pop(true);
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            child: const Text(
-              ' 네 ',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-    return shouldExit ?? false;
-  }
-
   @override
   Widget build(BuildContext context) {
     print(MediaQuery.of(context).size.width);
@@ -145,27 +80,24 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
         appBar: AppBar(
           backgroundColor: Colors.blueGrey,
           centerTitle: false,
-          title: DefaultTextStyle(
-            style: const TextStyle(
+          title: const Text(
+            'sib  세무 회계 계산기 연습앱',
+            style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
-            child: AnimatedTextKit(
-              animatedTexts: [
-                WavyAnimatedText('sib  세무 회계 계산기 연습앱'),
-              ],
-              isRepeatingAnimation: true,
-              totalRepeatCount: 100000,
-            ),
           ),
+        ),
+        drawer: const Drawer(
+          child: MyDrawer(),
         ),
         body: SingleChildScrollView(
           child: Container(
             color: Colors.grey[200],
             child: Column(
               children: [
-                MainPageIntroduction(),
+                const MainPageIntroduction(),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10.0),
                   child: Column(
@@ -227,7 +159,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                                       .setClassType(ClassEnum.memory);
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => ClassScreen(),
+                                      builder: (context) => const ClassScreen(),
                                     ),
                                   );
                                 },
@@ -259,13 +191,14 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                                   allReset();
                                   ref
                                       .read(classModelProvider.notifier)
-                                      .setClassType(ClassEnum.memory);
+                                      .setTestType(TestEnum.basic);
                                   ref
                                       .read(classModelProvider.notifier)
-                                      .setTestType(TestEnum.basic);
+                                      .setClassType(ClassEnum.none);
+
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => TestScreen(),
+                                      builder: (context) => const TestScreen(),
                                     ),
                                   );
                                 },
@@ -297,13 +230,13 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                                   allReset();
                                   ref
                                       .read(classModelProvider.notifier)
-                                      .setClassType(ClassEnum.memory);
+                                      .setClassType(ClassEnum.none);
                                   ref
                                       .read(classModelProvider.notifier)
                                       .setTestType(TestEnum.advanced);
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => ClassScreen(),
+                                      builder: (context) => const ClassScreen(),
                                     ),
                                   );
                                 },
@@ -375,7 +308,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                                       .setClassType(ClassEnum.gt);
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => ClassScreen(),
+                                      builder: (context) => const ClassScreen(),
                                     ),
                                   );
                                 },
@@ -407,13 +340,13 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                                   allReset();
                                   ref
                                       .read(classModelProvider.notifier)
-                                      .setClassType(ClassEnum.gt);
+                                      .setClassType(ClassEnum.none);
                                   ref
                                       .read(classModelProvider.notifier)
                                       .setTestType(TestEnum.basic);
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => ClassScreen(),
+                                      builder: (context) => const ClassScreen(),
                                     ),
                                   );
                                 },
@@ -445,13 +378,13 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                                   allReset();
                                   ref
                                       .read(classModelProvider.notifier)
-                                      .setClassType(ClassEnum.gt);
+                                      .setClassType(ClassEnum.none);
                                   ref
                                       .read(classModelProvider.notifier)
                                       .setTestType(TestEnum.advanced);
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => ClassScreen(),
+                                      builder: (context) => const ClassScreen(),
                                     ),
                                   );
                                 },
@@ -523,7 +456,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                                       .setClassType(ClassEnum.k);
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => ClassScreen(),
+                                      builder: (context) => const ClassScreen(),
                                     ),
                                   );
                                 },
@@ -555,13 +488,13 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                                   allReset();
                                   ref
                                       .read(classModelProvider.notifier)
-                                      .setClassType(ClassEnum.k);
+                                      .setClassType(ClassEnum.none);
                                   ref
                                       .read(classModelProvider.notifier)
                                       .setTestType(TestEnum.basic);
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => ClassScreen(),
+                                      builder: (context) => const ClassScreen(),
                                     ),
                                   );
                                 },
@@ -593,13 +526,13 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                                   allReset();
                                   ref
                                       .read(classModelProvider.notifier)
-                                      .setClassType(ClassEnum.k);
+                                      .setClassType(ClassEnum.none);
                                   ref
                                       .read(classModelProvider.notifier)
                                       .setTestType(TestEnum.advanced);
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => ClassScreen(),
+                                      builder: (context) => const ClassScreen(),
                                     ),
                                   );
                                 },
@@ -624,13 +557,79 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
       ),
     );
   }
+
+  Future<bool> _showExitConfirmationDialog(BuildContext context) async {
+    bool? shouldExit = false;
+    shouldExit = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        title: const Text(
+          '앱 종료',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        content: const Text(
+          '학습을 마칠까요?',
+          style: TextStyle(
+            fontSize: 18,
+          ),
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop(false);
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            child: const Text(
+              '아니오',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+              ),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop(true);
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.green,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            child: const Text(
+              ' 네 ',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+    return shouldExit ?? false;
+  }
 }
 
 class MainPageIntroduction extends StatelessWidget {
+  const MainPageIntroduction({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
