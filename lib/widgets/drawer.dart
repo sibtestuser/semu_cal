@@ -1,12 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:semu_cal/core/theme/board_theme.dart';
 import 'package:semu_cal/core/theme/cal_theme.dart';
+import 'package:semu_cal/core/theme/pen_theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MyDrawer extends ConsumerWidget {
   const MyDrawer({super.key});
+
+  Future<void> _changeCalTheme(String value, WidgetRef ref) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('catTheme', value);
+    ref.read(cal_Theme_Provider.notifier).changeTheme(value);
+  }
+
+  Future<void> _changePenTheme(String value, WidgetRef ref) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('penTheme', value);
+    ref.read(pen_Theme_Provider.notifier).changeTheme(value);
+  }
+
+  Future<void> _changeBoardTheme(String value, WidgetRef ref) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('boardTTheme', value);
+    ref.read(board_Theme_Provider.notifier).changeTheme(value);
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final calType = ref.watch(cal_Theme_Provider).type;
+    final penType = ref.watch(pen_Theme_Provider).type;
+    final boardType = ref.watch(board_Theme_Provider).type;
     return SafeArea(
       child: Column(
         children: [
@@ -39,7 +63,9 @@ class MyDrawer extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    _changeCalTheme(value!, ref);
+                  },
                 ),
                 RadioListTile<String>(
                   value: 'pink',
@@ -54,7 +80,9 @@ class MyDrawer extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    _changeCalTheme(value!, ref);
+                  },
                 ),
                 RadioListTile<String>(
                   value: 'grey',
@@ -69,7 +97,9 @@ class MyDrawer extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    _changeCalTheme(value!, ref);
+                  },
                 ),
               ],
             ),
@@ -92,7 +122,7 @@ class MyDrawer extends ConsumerWidget {
                 ),
                 RadioListTile<String>(
                   value: 'white',
-                  groupValue: calType,
+                  groupValue: boardType,
                   title: const Text('화이트보드'),
                   secondary: Container(
                     width: 24,
@@ -103,11 +133,13 @@ class MyDrawer extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    _changeBoardTheme(value!, ref);
+                  },
                 ),
                 RadioListTile<String>(
                   value: 'green',
-                  groupValue: calType,
+                  groupValue: boardType,
                   title: const Text('칠판'),
                   secondary: Container(
                     width: 24,
@@ -118,11 +150,13 @@ class MyDrawer extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    _changeBoardTheme(value!, ref);
+                  },
                 ),
                 RadioListTile<String>(
                   value: 'grey',
-                  groupValue: calType,
+                  groupValue: boardType,
                   title: const Text('그레이'),
                   secondary: Container(
                     width: 24,
@@ -133,7 +167,9 @@ class MyDrawer extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    _changeBoardTheme(value!, ref);
+                  },
                 ),
               ],
             ),
@@ -156,7 +192,7 @@ class MyDrawer extends ConsumerWidget {
                 ),
                 RadioListTile<String>(
                   value: 'white',
-                  groupValue: calType,
+                  groupValue: penType,
                   title: const Text('화이트'),
                   secondary: Container(
                     width: 24,
@@ -167,11 +203,13 @@ class MyDrawer extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    _changePenTheme(value!, ref);
+                  },
                 ),
                 RadioListTile<String>(
                   value: 'yellow',
-                  groupValue: calType,
+                  groupValue: penType,
                   title: const Text('옐로우'),
                   secondary: Container(
                     width: 24,
@@ -182,11 +220,13 @@ class MyDrawer extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    _changePenTheme(value!, ref);
+                  },
                 ),
                 RadioListTile<String>(
                   value: 'black',
-                  groupValue: calType,
+                  groupValue: penType,
                   title: const Text('블랙'),
                   secondary: Container(
                     width: 24,
@@ -197,7 +237,9 @@ class MyDrawer extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    _changePenTheme(value!, ref);
+                  },
                 ),
               ],
             ),

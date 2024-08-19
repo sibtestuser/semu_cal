@@ -27,6 +27,19 @@ class PenThemeController extends StateNotifier<PenTheme> {
         state = PenTheme_yellow();
     }
   }
+
+  Color getPenColor() {
+    switch (state.type) {
+      case 'white':
+        return Colors.white;
+      case 'yellow':
+        return Colors.yellow;
+      case 'black':
+        return Colors.black;
+      default:
+        return Colors.yellow;
+    }
+  }
 }
 
 class PenTheme {

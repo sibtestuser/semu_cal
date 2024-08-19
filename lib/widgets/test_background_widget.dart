@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:semu_cal/core/theme/board_theme.dart';
+import 'package:semu_cal/core/theme/pen_theme.dart';
 
-class TestBackgroundWidget extends StatelessWidget {
+class TestBackgroundWidget extends ConsumerWidget {
   final Widget child;
   const TestBackgroundWidget({super.key, required this.child});
 
@@ -9,12 +12,14 @@ class TestBackgroundWidget extends StatelessWidget {
 //page view 아래에 그려지는 부분이야.  우리가 이걸 배이스로 class 를 만들거야
 // Text
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final boarderTheme = ref.watch(board_Theme_Provider.notifier);
+    final penTheme = ref.watch(pen_Theme_Provider.notifier);
     return Padding(
       padding: const EdgeInsets.all(3.0), // Add padding around the container
       child: Container(
         decoration: BoxDecoration(
-          color: const Color(0xFF1B5E20),
+          color: boarderTheme.getBoardColor(),
 
           /// Dark green color for chalkboard
           border: Border.all(color: Colors.black, width: 2.0),
@@ -32,8 +37,8 @@ class TestBackgroundWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: DefaultTextStyle(
-              style: const TextStyle(
-                  color: Colors.yellow,
+              style: TextStyle(
+                  color: penTheme.getPenColor(),
                   fontWeight: FontWeight.bold,
                   fontSize: 20), // Set text color to white
               child: child,

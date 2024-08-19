@@ -104,15 +104,15 @@ class CalTheme_Pink extends CalTheme {
   @override
   String get type => 'pink';
   @override
-  Color get topBackGroundColor => Colors.grey[100]!;
+  Color get topBackGroundColor => Color(0xFFFFB6C1);
   @override
-  Color get bottomBackGroundColor => Colors.white;
+  Color get bottomBackGroundColor => Color(0xFFFFCDD1);
   @override
-  Color get number_button_color => Colors.grey[350]!;
+  Color get number_button_color => Colors.white;
   @override
-  Color get operation_button_color => Colors.grey[200]!;
+  Color get operation_button_color => Color(0xFFFFE4E1);
   @override
-  Color get function_button_color => Colors.grey[200]!;
+  Color get function_button_color => Color(0xFFFFE4E1);
   @override
   TextStyle getOutputDisplayTextStyle(BuildContext context) {
     return CustomTextTheme.getOutPutTextStyle(context);
@@ -130,14 +130,12 @@ class CalTheme_Pink extends CalTheme {
 
   @override
   TextStyle getOperationButtonTextStyle(BuildContext context) {
-    return CustomTextTheme.getButtonTextStyle(context)
-        .copyWith(color: Colors.blue[500]);
+    return CustomTextTheme.getButtonTextStyle(context);
   }
 
   @override
   TextStyle getFuctionButtonTextStyle(BuildContext context) {
-    return CustomTextTheme.getButtonTextStyle(context)
-        .copyWith(color: Colors.green[700]);
+    return CustomTextTheme.getButtonTextStyle(context);
   }
 }
 

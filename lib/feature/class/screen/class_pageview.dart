@@ -27,6 +27,7 @@ class _ClassMainPageViewState extends ConsumerState<ClassMainPageView> {
 
   void onPageChanged(int page) {
     ref.read(displayControllerProvider.notifier).makeReset();
+    ref.read(classModelProvider.notifier).setNextPage(false);
     print('page changed');
   }
 

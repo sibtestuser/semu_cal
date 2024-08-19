@@ -29,7 +29,7 @@ class DisplayOutputWidget extends ConsumerWidget {
             left: 20,
             right: 20,
             top: 15,
-            bottom: 30,
+            bottom: 25,
           ),
           decoration: BoxDecoration(
             color: calTheme.topBackGroundColor,

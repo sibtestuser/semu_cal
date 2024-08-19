@@ -5,12 +5,16 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:semu_cal/%08widgets/drawer.dart';
 import 'package:semu_cal/core/enum/enum.dart';
+import 'package:semu_cal/core/theme/board_theme.dart';
+import 'package:semu_cal/core/theme/cal_theme.dart';
+import 'package:semu_cal/core/theme/pen_theme.dart';
 import 'package:semu_cal/core/theme/texttheme.dart';
 import 'package:semu_cal/feature/calculator/controller/calculate_controller.dart';
 import 'package:semu_cal/feature/calculator/controller/display_controller.dart';
 import 'package:semu_cal/feature/class/controller/class_controller.dart';
 import 'package:semu_cal/feature/class/screen/class_screen.dart';
 import 'package:semu_cal/feature/test/screen/test_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainMenuScreen extends ConsumerStatefulWidget {
   const MainMenuScreen({super.key});
@@ -26,10 +30,27 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
   @override
   void initState() {
     super.initState();
+    _initializePreferences();
     // // 상태 변경을 initState에서 수행
     // WidgetsBinding.instance.addPostFrameCallback((_) {
     //   ref.read(cal_Theme_Provider.notifier).changeTheme('white');
     // });
+  }
+
+  Future<void> _initializePreferences() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    // 초기 설정 로드
+    final calTheme = prefs.getString('calTheme') ?? 'white';
+    final penTheme = prefs.getString('penTheme') ?? 'yellow';
+    final boardTTheme = prefs.getString('boardTTheme') ?? 'green';
+
+    // 초기 상태 설정
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(cal_Theme_Provider.notifier).changeTheme(calTheme);
+      ref.read(pen_Theme_Provider.notifier).changeTheme(penTheme);
+      ref.read(board_Theme_Provider.notifier).changeTheme(boardTTheme);
+    });
   }
 
   void memoryMenuTabChange() {
@@ -79,7 +100,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
         backgroundColor: Colors.grey[200],
         appBar: AppBar(
           backgroundColor: Colors.blueGrey,
-          centerTitle: false,
+          centerTitle: true,
           title: const Text(
             'sib  세무 회계 계산기 연습앱',
             style: TextStyle(
@@ -88,8 +109,12 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
               color: Colors.white,
             ),
           ),
+          iconTheme: IconThemeData(
+            color: Colors.white, // 아이콘 색상 변경
+          ),
         ),
         drawer: const Drawer(
+          elevation: 10,
           child: MyDrawer(),
         ),
         body: SingleChildScrollView(

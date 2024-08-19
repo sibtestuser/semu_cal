@@ -5,12 +5,14 @@ class CustomTextTheme {
   static TextStyle getOutPutTextStyle(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double fontSize;
-    if (width < 400) {
-      fontSize = 38;
+    if (width < 380) {
+      fontSize = 33;
+    } else if (width < 400) {
+      fontSize = 37;
     } else if (width >= 400 && width < 600) {
-      fontSize = 42;
+      fontSize = 40;
     } else {
-      fontSize = 60;
+      fontSize = 50;
     }
     return TextStyle(
         fontSize: fontSize, fontWeight: FontWeight.bold, color: Colors.black);
@@ -19,7 +21,9 @@ class CustomTextTheme {
   static TextStyle getExtraOutPutTextStyle(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double fontSize;
-    if (width < 400) {
+    if (width < 380) {
+      fontSize = 10;
+    } else if (width < 400) {
       fontSize = 12;
     } else if (width >= 400 && width < 600) {
       fontSize = 15;
@@ -220,7 +224,9 @@ class CustomTextTheme {
   static TextStyle getClassText(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double fontSize;
-    if (width < 400) {
+    if (width < 380) {
+      fontSize = 15;
+    } else if (width < 400) {
       fontSize = 17;
     } else if (width >= 400 && width < 600) {
       fontSize = 19;

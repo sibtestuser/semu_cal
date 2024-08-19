@@ -38,7 +38,7 @@ class PageViewBackGroundWidget extends ConsumerWidget {
                       ),
                     ),
                     onPressed: () {
-                      ref.read(displayControllerProvider.notifier).makeReset();
+                      // ref.read(displayControllerProvider.notifier).makeReset();
                       ref.read(classModelProvider.notifier).setNextPage(false);
                       pageController.previousPage(
                         duration: const Duration(milliseconds: 300),
@@ -61,12 +61,12 @@ class PageViewBackGroundWidget extends ConsumerWidget {
                             ),
                           ),
                           onPressed: () {
-                            ref
-                                .read(displayControllerProvider.notifier)
-                                .makeReset();
-                            ref
-                                .read(classModelProvider.notifier)
-                                .setNextPage(false);
+                            // ref
+                            //     .read(displayControllerProvider.notifier)
+                            //     .makeReset();
+                            // ref
+                            //     .read(classModelProvider.notifier)
+                            //     .setNextPage(false);
                             pageController.nextPage(
                               duration: const Duration(milliseconds: 300),
                               curve: Curves.easeInOut,
@@ -83,12 +83,12 @@ class PageViewBackGroundWidget extends ConsumerWidget {
                             color: Colors.grey[300],
                           ),
                           onPressed: () {
-                            ref
-                                .read(displayControllerProvider.notifier)
-                                .makeReset();
-                            ref
-                                .read(classModelProvider.notifier)
-                                .setNextPage(false);
+                            // ref
+                            //     .read(displayControllerProvider.notifier)
+                            //     .makeReset();
+                            // ref
+                            //     .read(classModelProvider.notifier)
+                            //     .setNextPage(false);
                             pageController.nextPage(
                               duration: const Duration(milliseconds: 300),
                               curve: Curves.easeInOut,

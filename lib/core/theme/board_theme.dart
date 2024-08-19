@@ -27,6 +27,19 @@ class BoardThemeController extends StateNotifier<BoardTheme> {
         state = BoardTheme_green();
     }
   }
+
+  Color getBoardColor() {
+    switch (state.type) {
+      case 'white':
+        return Colors.white;
+      case 'green':
+        return Colors.green[700]!;
+      case 'grey':
+        return Colors.grey[700]!;
+      default:
+        return Colors.green[700]!;
+    }
+  }
 }
 
 class BoardTheme {

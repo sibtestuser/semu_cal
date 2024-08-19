@@ -40,8 +40,8 @@ class _MemoryClass_4State extends ConsumerState<MemoryClass_4> {
     super.dispose();
   }
 
-  void _startTimer(Duration duration, VoidCallback callback) {
-    _timers.add(Timer(duration, () {
+  void _startTimer(int duration, VoidCallback callback) {
+    _timers.add(Timer(Duration(milliseconds: duration), () {
       if (mounted) {
         callback();
       }
@@ -78,35 +78,37 @@ class _MemoryClass_4State extends ConsumerState<MemoryClass_4> {
             isRepeatingAnimation: false,
             // totalRepeatCount: 1,
             onFinished: () {
-              ref
-                  .read(displayControllerProvider.notifier)
-                  .setTouchButton('2', duration: 5000);
-              ref
-                  .read(displayControllerProvider.notifier)
-                  .updateTempOutput('2');
-              _startTimer(
-                const Duration(milliseconds: 500),
-                () {
-                  ref
-                      .read(displayControllerProvider.notifier)
-                      .setTouchButton('x', duration: 5000);
-                  ref
-                      .read(displayControllerProvider.notifier)
-                      .updateTempOutput('x');
+              _startTimer(100, () {
+                ref
+                    .read(displayControllerProvider.notifier)
+                    .setTouchButton('2', duration: 5000);
+                ref
+                    .read(displayControllerProvider.notifier)
+                    .updateTempOutput('2');
+                _startTimer(
+                  500,
+                  () {
+                    ref
+                        .read(displayControllerProvider.notifier)
+                        .setTouchButton('x', duration: 5000);
+                    ref
+                        .read(displayControllerProvider.notifier)
+                        .updateTempOutput('x');
 
-                  _startTimer(const Duration(milliseconds: 500), () {
-                    ref
-                        .read(displayControllerProvider.notifier)
-                        .setTouchButton('3', duration: 1000);
-                    ref
-                        .read(displayControllerProvider.notifier)
-                        .updateTempOutput('3');
-                    setState(() {
-                      firstani = true;
+                    _startTimer(500, () {
+                      ref
+                          .read(displayControllerProvider.notifier)
+                          .setTouchButton('3', duration: 1000);
+                      ref
+                          .read(displayControllerProvider.notifier)
+                          .updateTempOutput('3');
+                      setState(() {
+                        firstani = true;
+                      });
                     });
-                  });
-                },
-              );
+                  },
+                );
+              });
             },
           ),
           const SizedBox(
@@ -121,18 +123,20 @@ class _MemoryClass_4State extends ConsumerState<MemoryClass_4> {
               isRepeatingAnimation: false,
               //  totalRepeatCount: 1,
               onFinished: () {
-                ref
-                    .read(displayControllerProvider.notifier)
-                    .setTouchButton('M+', duration: 2000);
-                ref
-                    .read(displayControllerProvider.notifier)
-                    .updateTempOutput('6');
-                ref
-                    .read(displayControllerProvider.notifier)
-                    .addMemoryList(6, context);
-                _startTimer(const Duration(milliseconds: 500), () {
-                  setState(() {
-                    secondani = true;
+                _startTimer(10, () {
+                  ref
+                      .read(displayControllerProvider.notifier)
+                      .setTouchButton('M+', duration: 2000);
+                  ref
+                      .read(displayControllerProvider.notifier)
+                      .updateTempOutput('6');
+                  ref
+                      .read(displayControllerProvider.notifier)
+                      .addMemoryList(6, context);
+                  _startTimer(500, () {
+                    setState(() {
+                      secondani = true;
+                    });
                   });
                 });
               },
@@ -166,44 +170,46 @@ class _MemoryClass_4State extends ConsumerState<MemoryClass_4> {
               isRepeatingAnimation: false,
               //  totalRepeatCount: 1,
               onFinished: () {
-                ref
-                    .read(displayControllerProvider.notifier)
-                    .setTouchButton('4', duration: 5000);
-                ref
-                    .read(displayControllerProvider.notifier)
-                    .updateTempOutput('4');
-
-                // 0.3초 후에 두 번째 연산을 실행
-                _startTimer(const Duration(milliseconds: 300), () {
+                _startTimer(10, () {
                   ref
                       .read(displayControllerProvider.notifier)
-                      .setTouchButton('x', duration: 5000);
+                      .setTouchButton('4', duration: 5000);
                   ref
                       .read(displayControllerProvider.notifier)
-                      .updateTempOutput('x');
+                      .updateTempOutput('4');
 
-                  // 다시 0.3초 후에 세 번째 연산을 실행
-                  _startTimer(const Duration(milliseconds: 300), () {
+                  // 0.3초 후에 두 번째 연산을 실행
+                  _startTimer(300, () {
                     ref
                         .read(displayControllerProvider.notifier)
-                        .setTouchButton('5', duration: 5000);
+                        .setTouchButton('x', duration: 5000);
                     ref
                         .read(displayControllerProvider.notifier)
-                        .updateTempOutput('5');
+                        .updateTempOutput('x');
 
-                    // 마지막으로 0.3초 후에 네 번째 연산을 실행
-                    _startTimer(const Duration(milliseconds: 300), () {
+                    // 다시 0.3초 후에 세 번째 연산을 실행
+                    _startTimer(300, () {
                       ref
                           .read(displayControllerProvider.notifier)
-                          .setTouchButton('M+', duration: 5000);
+                          .setTouchButton('5', duration: 5000);
                       ref
                           .read(displayControllerProvider.notifier)
-                          .addMemoryList(20, context);
-                      ref
-                          .read(displayControllerProvider.notifier)
-                          .updateTempOutput('20');
-                      setState(() {
-                        fourthani = true;
+                          .updateTempOutput('5');
+
+                      // 마지막으로 0.3초 후에 네 번째 연산을 실행
+                      _startTimer(300, () {
+                        ref
+                            .read(displayControllerProvider.notifier)
+                            .setTouchButton('M+', duration: 5000);
+                        ref
+                            .read(displayControllerProvider.notifier)
+                            .addMemoryList(20, context);
+                        ref
+                            .read(displayControllerProvider.notifier)
+                            .updateTempOutput('20');
+                        setState(() {
+                          fourthani = true;
+                        });
                       });
                     });
                   });

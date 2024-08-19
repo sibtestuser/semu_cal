@@ -21,8 +21,6 @@ class TestScreen extends ConsumerWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            ref.read(testModelProvider.notifier).setNextPage(false);
-
             Navigator.of(context).pop();
           },
         ),
