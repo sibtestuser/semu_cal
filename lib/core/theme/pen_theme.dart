@@ -24,7 +24,7 @@ class PenThemeController extends StateNotifier<PenTheme> {
         state = PenTheme_black();
         break;
       default:
-        state = PenTheme_yellow();
+        state = PenTheme_black();
     }
   }
 

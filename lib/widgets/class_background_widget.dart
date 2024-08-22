@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:semu_cal/core/theme/board_theme.dart';
 import 'package:semu_cal/core/theme/pen_theme.dart';
+import 'package:semu_cal/core/theme/texttheme.dart';
 
 class ClassBackgroundWidget extends ConsumerWidget {
   final Widget child;
@@ -13,6 +14,7 @@ class ClassBackgroundWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final boarderTheme = ref.watch(board_Theme_Provider.notifier);
     final penTheme = ref.watch(pen_Theme_Provider.notifier);
+    double fontSize = CustomTextTheme.getClassTextSize(context);
     return Padding(
       padding: const EdgeInsets.all(3.0), // Add padding around the container
       child: Container(
@@ -38,7 +40,7 @@ class ClassBackgroundWidget extends ConsumerWidget {
             style: TextStyle(
                 color: penTheme.getPenColor(),
                 fontWeight: FontWeight.bold,
-                fontSize: 17), // Set text color to white
+                fontSize: fontSize), // Set text color to white
             child: child,
           ),
         ),

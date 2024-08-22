@@ -42,8 +42,8 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
 
     // 초기 설정 로드
     final calTheme = prefs.getString('calTheme') ?? 'white';
-    final penTheme = prefs.getString('penTheme') ?? 'yellow';
-    final boardTTheme = prefs.getString('boardTTheme') ?? 'green';
+    final penTheme = prefs.getString('penTheme') ?? 'black';
+    final boardTTheme = prefs.getString('boardTTheme') ?? 'white';
 
     // 초기 상태 설정
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -170,7 +170,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                               ),
                               elevation: 10,
                               child: ListTile(
-                                title: const Text(' M+ / M- 학습하기'),
+                                title: const Text(' M+  M- 알아보기'),
                                 leading: const Icon(
                                   CupertinoIcons
                                       .pencil, // Changed to Cupertino icon
@@ -205,7 +205,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                               ),
                               elevation: 10,
                               child: ListTile(
-                                title: const Text('M+ / M- 기본 문제 풀기'),
+                                title: const Text('M+  M- 기본 문제 풀기'),
                                 tileColor: Colors.white,
                                 leading: const Icon(
                                   CupertinoIcons
@@ -244,7 +244,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                               ),
                               elevation: 10,
                               child: ListTile(
-                                title: const Text('M+ / M- 응용 문제 풀기'),
+                                title: const Text('M+  M- 응용 문제 풀기'),
                                 tileColor: Colors.white,
                                 leading: const Icon(
                                   CupertinoIcons
@@ -319,7 +319,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                               ),
                               elevation: 10,
                               child: ListTile(
-                                title: const Text(' M+ / M- 학습하기'),
+                                title: const Text('GT 알아보기'),
                                 leading: const Icon(
                                   CupertinoIcons
                                       .pencil, // Changed to Cupertino icon
@@ -354,7 +354,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                               ),
                               elevation: 10,
                               child: ListTile(
-                                title: const Text('M+ / M- 기본 문제 풀기'),
+                                title: const Text('GT 기본 문제 풀기'),
                                 tileColor: Colors.white,
                                 leading: const Icon(
                                   CupertinoIcons
@@ -392,7 +392,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                               ),
                               elevation: 10,
                               child: ListTile(
-                                title: const Text('M+ / M- 응용 문제 풀기'),
+                                title: const Text('GT 응용 문제 풀기'),
                                 tileColor: Colors.white,
                                 leading: const Icon(
                                   CupertinoIcons

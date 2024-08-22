@@ -254,6 +254,19 @@ class CustomTextTheme {
         fontWeight: FontWeight.bold,
         fontSize: fontSize); // Set
   }
+
+  static double getClassTextSize(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    if (width < 380) {
+      return 15;
+    } else if (width < 400) {
+      return 17;
+    } else if (width >= 400 && width < 600) {
+      return 19;
+    } else {
+      return 21;
+    }
+  }
   // static const displayPopupBlack = TextStyle(
   //   fontSize: 15,
   //   fontWeight: FontWeight.bold,

@@ -61,6 +61,12 @@ class DisplayController extends StateNotifier<DisplayModel> {
     );
   }
 
+  void clearGT() {
+    state = state.copyWith(
+      gt: [],
+    );
+  }
+
   void updateOperation(operationEnum value) {
     state = state.copyWith(
       operation: value,

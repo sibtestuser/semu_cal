@@ -4,6 +4,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:semu_cal/%08widgets/class_background_widget.dart';
+import 'package:semu_cal/%08widgets/my_ani_text.dart';
 import 'package:semu_cal/feature/calculator/controller/display_controller.dart';
 import 'package:semu_cal/feature/class/controller/class_controller.dart';
 
@@ -56,20 +57,21 @@ class _MemoryClass_5State extends ConsumerState<MemoryClass_5> {
         children: [
           AnimatedTextKit(
             animatedTexts: [
-              TypewriterAnimatedText('메모리에 저장된 결과는 어떻게 확인할 수 있을까요?'),
+              TypewriterAnimatedText('메모리에 저장된 결과는 어떻게 확인할까요? '),
             ],
             pause: const Duration(milliseconds: 100),
             isRepeatingAnimation: false,
             // totalRepeatCount: 1,
             onFinished: () {
               _startTimer(10, () {
+                ref.read(displayControllerProvider.notifier).makeReset();
                 ref
                     .read(displayControllerProvider.notifier)
                     .addMemoryList(6, context);
                 ref
                     .read(displayControllerProvider.notifier)
                     .addMemoryList(20, context);
-                _startTimer(500, () {
+                _startTimer(300, () {
                   setState(() {
                     firstani = true;
                   });
@@ -81,14 +83,14 @@ class _MemoryClass_5State extends ConsumerState<MemoryClass_5> {
           if (firstani)
             AnimatedTextKit(
               animatedTexts: [
-                TypewriterAnimatedText('MR 버튼을 누르면 '),
+                TypewriterAnimatedText('계산기 MR(Memory Read) 버튼을 누르면 '),
               ],
               pause: const Duration(milliseconds: 100),
               isRepeatingAnimation: false,
               //  totalRepeatCount: 1,
               onFinished: () {
                 _startTimer(
-                  500,
+                  10,
                   () {
                     ref
                         .read(displayControllerProvider.notifier)
@@ -106,9 +108,9 @@ class _MemoryClass_5State extends ConsumerState<MemoryClass_5> {
           if (secondani)
             AnimatedTextKit(
               animatedTexts: [
-                TypewriterAnimatedText('메모리에 있던 +6 +20 의 결과 +26 이 출력됩니다'),
+                TypewriterAnimatedText('메모리에 저장된 연산들을 수행하여'),
               ],
-              pause: const Duration(milliseconds: 1000),
+              pause: const Duration(milliseconds: 500),
               isRepeatingAnimation: false,
               //  totalRepeatCount: 1,
               onFinished: () {
@@ -128,11 +130,21 @@ class _MemoryClass_5State extends ConsumerState<MemoryClass_5> {
           if (thirdani)
             AnimatedTextKit(
               animatedTexts: [
-                TypewriterAnimatedText('이어서 M- 연산도 연습해보겠습니다'),
+                TypewriterAnimatedText('+6 + 20 = 26 '),
               ],
               pause: const Duration(milliseconds: 100),
               isRepeatingAnimation: false,
               //  totalRepeatCount: 1,
+              onFinished: () {
+                setState(() {
+                  fourthani = true;
+                });
+              },
+            ),
+          const SizedBox(height: 5),
+          if (fourthani)
+            MyAnimatedText(
+              text: '연산의 결과값을 디스플레이에 보여줍니다',
               onFinished: () {
                 _startTimer(
                   100,

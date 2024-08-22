@@ -60,7 +60,20 @@ class _MemoryClass_2State extends ConsumerState<MemoryClass_2> {
           AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             height: firstani ? 30 : 0,
-            color: Colors.white, // 배경색을 하얀색으로 설정
+
+            decoration: BoxDecoration(
+              color: Colors.white, // 배경색을 하얀색으로 설정
+              boxShadow: firstani
+                  ? [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: const Offset(0, 3), // 그림자의 위치 조정
+                      ),
+                    ]
+                  : [],
+            ), // 배경색을 하얀색으로 설정
             child: firstani
                 ? const Center(
                     child: Text(
@@ -140,6 +153,14 @@ class _MemoryClass_2State extends ConsumerState<MemoryClass_2> {
                       border: Border.all(
                           color: Colors.brown, width: 2), // 테두리 색상 및 두께
                       borderRadius: BorderRadius.circular(8), // 모서리 둥글게
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.5),
+                          spreadRadius: 2,
+                          blurRadius: 5,
+                          offset: const Offset(0, 3), // 그림자의 위치 조정
+                        ),
+                      ],
                     ),
                     padding: const EdgeInsets.all(8), // 내부 여백
                     child: Center(

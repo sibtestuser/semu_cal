@@ -32,7 +32,9 @@ class ClassController extends StateNotifier<ClassModel> {
         break;
 
       case ClassEnum.gt:
-      // TODO: Handle this case.
+        state = state.copyWith(
+          classWidgetList: ClassList.gtClassList,
+        );
       case ClassEnum.k:
       case ClassEnum.none:
         state = state.copyWith(

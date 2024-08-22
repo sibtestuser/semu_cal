@@ -57,7 +57,20 @@ class _MemoryClass_4State extends ConsumerState<MemoryClass_4> {
           AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             height: startani ? 30 : 0,
-            color: Colors.white, // 배경색을 하얀색으로 설정
+
+            decoration: BoxDecoration(
+              color: Colors.white, // 배경색을 하얀색으로 설정
+              boxShadow: startani
+                  ? [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: const Offset(0, 3), // 그림자의 위치 조정
+                      ),
+                    ]
+                  : [],
+            ), // 배경색을 하얀색으// 배경색을 하얀색으로 설정
             child: startani
                 ? const Center(
                     child: Text(
@@ -179,7 +192,7 @@ class _MemoryClass_4State extends ConsumerState<MemoryClass_4> {
                       .updateTempOutput('4');
 
                   // 0.3초 후에 두 번째 연산을 실행
-                  _startTimer(300, () {
+                  _startTimer(200, () {
                     ref
                         .read(displayControllerProvider.notifier)
                         .setTouchButton('x', duration: 5000);
@@ -188,7 +201,7 @@ class _MemoryClass_4State extends ConsumerState<MemoryClass_4> {
                         .updateTempOutput('x');
 
                     // 다시 0.3초 후에 세 번째 연산을 실행
-                    _startTimer(300, () {
+                    _startTimer(200, () {
                       ref
                           .read(displayControllerProvider.notifier)
                           .setTouchButton('5', duration: 5000);
@@ -197,7 +210,7 @@ class _MemoryClass_4State extends ConsumerState<MemoryClass_4> {
                           .updateTempOutput('5');
 
                       // 마지막으로 0.3초 후에 네 번째 연산을 실행
-                      _startTimer(300, () {
+                      _startTimer(200, () {
                         ref
                             .read(displayControllerProvider.notifier)
                             .setTouchButton('M+', duration: 5000);

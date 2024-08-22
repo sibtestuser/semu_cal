@@ -99,7 +99,7 @@ class _MemoryClass_6State extends ConsumerState<MemoryClass_6> {
           if (secondani)
             AnimatedTextKit(
               animatedTexts: [
-                TypewriterAnimatedText('계산기 출력화면 왼쪽 상단에  M 마크가'),
+                TypewriterAnimatedText('계산기 디스플레이 왼쪽 상단에  M 마크가'),
               ],
               pause: const Duration(milliseconds: 100),
               isRepeatingAnimation: false,

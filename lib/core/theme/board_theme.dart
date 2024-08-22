@@ -24,7 +24,7 @@ class BoardThemeController extends StateNotifier<BoardTheme> {
         state = BoardTheme_grey();
         break;
       default:
-        state = BoardTheme_green();
+        state = BoardTheme_white();
     }
   }
 
