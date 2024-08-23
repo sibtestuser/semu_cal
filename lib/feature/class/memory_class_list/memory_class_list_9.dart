@@ -57,7 +57,7 @@ class _MemoryClass_9State extends ConsumerState<MemoryClass_9> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           MyAnimatedText(
-              text: '지금까지 Memory 에 대해 알아보았습니다.',
+              text: '이번에는 조금 응용해 보겠습니다.',
               onFinished: () {
                 ref.read(displayControllerProvider.notifier).makeReset();
                 setState(() {
@@ -68,11 +68,72 @@ class _MemoryClass_9State extends ConsumerState<MemoryClass_9> {
             height: 5,
           ),
           if (firstani)
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              height: startani ? 55 : 0,
+              decoration: BoxDecoration(
+                color: Colors.white, // 배경색을 하얀색으로 설정
+                boxShadow: startani
+                    ? [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.5),
+                          spreadRadius: 2,
+                          blurRadius: 5,
+                          offset: const Offset(0, 3), // 그림자의 위치 조정
+                        ),
+                      ]
+                    : [],
+              ),
+              child: startani
+                  ? const Center(
+                      child: Column(
+                        children: [
+                          Text(
+                            '(2 x 3) - (4 x 5) ',
+
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black), // 글자색을 검은색으로 설정
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 15.0),
+                            child: Divider(
+                              thickness: 2,
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            '2',
+
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black), // 글자색을 검은색으로 설정
+                          ),
+                        ],
+                      ),
+                    )
+                  : null,
+            ),
+          const SizedBox(
+            height: 5,
+          ),
+          if (firstani)
             MyAnimatedText(
-              text: '= 대신 M+ 와 M- 를 이용하는 부분이',
+              text: '(2 x 3) M+ 그리고 (4 x 5) M- 로 분자를 계산 후 메모리 저장',
               onFinished: () {
-                setState(() {
-                  secondani = true;
+                _startTimer(300, () {
+                  ref
+                      .read(displayControllerProvider.notifier)
+                      .addMemoryList(6, context);
+                  ref
+                      .read(displayControllerProvider.notifier)
+                      .addMemoryList(-20, context);
+
+                  _startTimer(500, () {
+                    setState(() {
+                      secondani = true;
+                    });
+                  });
                 });
               },
             ),
@@ -81,13 +142,27 @@ class _MemoryClass_9State extends ConsumerState<MemoryClass_9> {
           ),
           if (secondani)
             MyAnimatedText(
-              text: '생소할 수 있습니다만',
+              text: '그 다음 MR 로 분자의 결과값을 가져오고',
               onFinished: () {
-                _startTimer(300, () {
-                  setState(() {
-                    thirdani = true;
-                  });
+                _startTimer(500, () {
+                  ref
+                      .read(displayControllerProvider.notifier)
+                      .setTouchButton('MR');
+                  ref
+                      .read(displayControllerProvider.notifier)
+                      .updateTempOutput('-14');
                   // ref.read(displayControllerProvider.notifier).addMemoryList(20, context);
+                  _startTimer(1000, () {
+                    ref.read(displayControllerProvider.notifier).setTouchButton(
+                          '÷',
+                          duration: 500,
+                        );
+                    _startTimer(500, () {
+                      setState(() {
+                        thirdani = true;
+                      });
+                    });
+                  });
                 });
               },
             ),
@@ -96,35 +171,43 @@ class _MemoryClass_9State extends ConsumerState<MemoryClass_9> {
           ),
           if (thirdani)
             MyAnimatedText(
-              text: '기본문제와 응용문제를 통해 ',
+              text: '그 다음 분모 2로 나눠 결과를 얻습니다',
               onFinished: () {
-                setState(() {
-                  fourthani = true;
-                });
-              },
-            ),
-          const SizedBox(
-            height: 5,
-          ),
-          if (fourthani)
-            MyAnimatedText(
-              text: '금방 익숙해지실거라 생각합니다',
-              onFinished: () {
-                _startTimer(200, () {
-                  setState(() {
-                    fifthani = true;
+                _startTimer(1000, () {
+                  ref
+                      .read(displayControllerProvider.notifier)
+                      .setTouchButton('2');
+                  ref
+                      .read(displayControllerProvider.notifier)
+                      .updateTempOutput('2');
+                  _startTimer(1000, () {
+                    ref.read(displayControllerProvider.notifier).setTouchButton(
+                          '=',
+                          duration: 500,
+                        );
+                    ref
+                        .read(displayControllerProvider.notifier)
+                        .updateTempOutput('-7');
                   });
                 });
               },
             ),
-          const SizedBox(
-            height: 5,
-          ),
-          if (fifthani)
-            MyAnimatedText(
-              text: '감사합니다',
-              onFinished: () {},
-            ),
+          // const SizedBox(
+          //   height: 5,
+          // ),
+          // if (fourthani)
+          //   MyAnimatedText(
+          //     text: '+ 대신에 M+ 그리고 - 대신 M- 를 사용하여',
+          //     onFinished: () {
+          //       _startTimer(200, () {
+          //         _startTimer(200, () {
+          //           setState(() {
+          //             fifthani = true;
+          //           });
+          //         });
+          //       });
+          //     },
+          //   ),
         ],
       ),
     );

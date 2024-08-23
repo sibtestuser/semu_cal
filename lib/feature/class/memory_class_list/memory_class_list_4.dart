@@ -104,9 +104,6 @@ class _MemoryClass_4State extends ConsumerState<MemoryClass_4> {
                     ref
                         .read(displayControllerProvider.notifier)
                         .setTouchButton('x', duration: 5000);
-                    ref
-                        .read(displayControllerProvider.notifier)
-                        .updateTempOutput('x');
 
                     _startTimer(500, () {
                       ref

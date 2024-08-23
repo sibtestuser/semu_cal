@@ -9,6 +9,7 @@ class Calmodel {
   bool workingFirstOperand = true;
   double currentMemory = 0;
   double gt = 0;
+  double currentK = 0;
   double answerNum = 0;
   double userAnswerNum = 0;
   String userAnswerString = '';
@@ -20,6 +21,7 @@ class Calmodel {
     this.operation = operationEnum.none,
     this.function = functionEnum.none,
     this.k = operationEnum.none,
+    this.currentK = 0,
     this.workingFirstOperand = true,
     this.currentMemory = 0,
     this.gt = 0,
@@ -44,6 +46,7 @@ class Calmodel {
     String? userAnswerString,
     String? answerStirng,
     int? numOfOperation,
+    double? currentK,
   }) {
     return Calmodel(
       firstOperand: firstOperand ?? this.firstOperand,
@@ -59,6 +62,7 @@ class Calmodel {
       userAnswerString: userAnswerString ?? this.userAnswerString,
       answerStirng: answerStirng ?? this.answerStirng,
       numOfOperation: numOfOperation ?? this.numOfOperation,
+      currentK: currentK ?? this.currentK,
     );
   }
 }

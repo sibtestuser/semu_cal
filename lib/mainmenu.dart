@@ -219,7 +219,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                                       .setTestType(TestEnum.basic);
                                   ref
                                       .read(classModelProvider.notifier)
-                                      .setClassType(ClassEnum.none);
+                                      .setClassType(ClassEnum.memory);
 
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
@@ -255,7 +255,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                                   allReset();
                                   ref
                                       .read(classModelProvider.notifier)
-                                      .setClassType(ClassEnum.none);
+                                      .setClassType(ClassEnum.memory);
                                   ref
                                       .read(classModelProvider.notifier)
                                       .setTestType(TestEnum.advanced);
@@ -467,7 +467,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                               ),
                               elevation: 10,
                               child: ListTile(
-                                title: const Text(' M+ / M- 학습하기'),
+                                title: const Text('K 알아보기'),
                                 leading: const Icon(
                                   CupertinoIcons
                                       .pencil, // Changed to Cupertino icon
@@ -502,7 +502,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                               ),
                               elevation: 10,
                               child: ListTile(
-                                title: const Text('M+ / M- 기본 문제 풀기'),
+                                title: const Text('K 기본 문제 풀기'),
                                 tileColor: Colors.white,
                                 leading: const Icon(
                                   CupertinoIcons
@@ -540,7 +540,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                               ),
                               elevation: 10,
                               child: ListTile(
-                                title: const Text('M+ / M- 응용 문제 풀기'),
+                                title: const Text('K 응용 문제 풀기'),
                                 tileColor: Colors.white,
                                 leading: const Icon(
                                   CupertinoIcons

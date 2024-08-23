@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:semu_cal/%08widgets/page_view_background.dart';
+import 'package:semu_cal/feature/calculator/controller/calculate_controller.dart';
 import 'package:semu_cal/feature/calculator/controller/display_controller.dart';
 import 'package:semu_cal/feature/class/controller/class_controller.dart';
 
@@ -27,6 +28,7 @@ class _ClassMainPageViewState extends ConsumerState<ClassMainPageView> {
 
   void onPageChanged(int page) {
     ref.read(displayControllerProvider.notifier).makeReset();
+    ref.read(calculatorControllerProvider.notifier).makeReset();
     ref.read(classModelProvider.notifier).setNextPage(false);
     print('page changed');
   }

@@ -21,6 +21,7 @@ class _MemoryClass_5State extends ConsumerState<MemoryClass_5> {
   bool secondani = false;
   bool thirdani = false;
   bool fourthani = false;
+  bool fifthani = false;
   final List<Timer> _timers = [];
 
   @override
@@ -83,7 +84,7 @@ class _MemoryClass_5State extends ConsumerState<MemoryClass_5> {
           if (firstani)
             AnimatedTextKit(
               animatedTexts: [
-                TypewriterAnimatedText('계산기 MR(Memory Read) 버튼을 누르면 '),
+                TypewriterAnimatedText('계산기 MR(Memory Recall) 버튼을 누르면 '),
               ],
               pause: const Duration(milliseconds: 100),
               isRepeatingAnimation: false,
@@ -94,7 +95,7 @@ class _MemoryClass_5State extends ConsumerState<MemoryClass_5> {
                   () {
                     ref
                         .read(displayControllerProvider.notifier)
-                        .setTouchButton('MR', duration: 5000);
+                        .setTouchButton('MR', duration: 2000);
                   },
                 );
                 setState(() {
@@ -110,7 +111,7 @@ class _MemoryClass_5State extends ConsumerState<MemoryClass_5> {
               animatedTexts: [
                 TypewriterAnimatedText('메모리에 저장된 연산들을 수행하여'),
               ],
-              pause: const Duration(milliseconds: 500),
+              pause: const Duration(milliseconds: 100),
               isRepeatingAnimation: false,
               //  totalRepeatCount: 1,
               onFinished: () {
@@ -145,6 +146,16 @@ class _MemoryClass_5State extends ConsumerState<MemoryClass_5> {
           if (fourthani)
             MyAnimatedText(
               text: '연산의 결과값을 디스플레이에 보여줍니다',
+              onFinished: () {
+                setState(() {
+                  fifthani = true;
+                });
+              },
+            ),
+          const SizedBox(height: 5),
+          if (fifthani)
+            MyAnimatedText(
+              text: 'Recall이 와닿지 않으면 메모리 리드라고 생각해보세요',
               onFinished: () {
                 _startTimer(
                   100,

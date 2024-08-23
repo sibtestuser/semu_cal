@@ -80,6 +80,7 @@ class ButtonWidget extends ConsumerWidget {
                 children: <Widget>[
                   FunctionButtonWidget(value: functionEnum.ac),
                   NumberButtonWidget(value: "0"),
+                  NumberButtonWidget(value: "."),
                   OperatorButtonWidget(value: operationEnum.result),
                   OperatorButtonWidget(value: operationEnum.plus),
                 ],

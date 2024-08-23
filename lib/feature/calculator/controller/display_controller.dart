@@ -18,8 +18,18 @@ class DisplayController extends StateNotifier<DisplayModel> {
   }) : super(DisplayModel());
 
   void updateOutput(String value) {
+    if (value == '') value = '0';
     double parsedValue = double.parse(value);
-    String formattedValue = parsedValue.toStringAsFixed(1);
+    // if (parsedValue == 0) {
+    //   if (state.gt.isNotEmpty) {
+    //     for (int i = 0; i < state.gt.length; i++) {
+    //       parsedValue = parsedValue + state.gt[i];
+    //     }
+    //   }
+    // }
+    String formattedValue = parsedValue % 1 == 0
+        ? parsedValue.toStringAsFixed(0)
+        : parsedValue.toStringAsFixed(2);
     value = formattedValue;
     state = state.copyWith(
       displyOutput: value,
@@ -27,6 +37,12 @@ class DisplayController extends StateNotifier<DisplayModel> {
   }
 
   void updateTempOutput(String value) {
+    if (value == '') value = '0';
+    double parsedValue = double.parse(value);
+    String formattedValue = parsedValue % 1 == 0
+        ? parsedValue.toStringAsFixed(0)
+        : parsedValue.toStringAsFixed(2);
+    value = formattedValue;
     state = state.copyWith(
       displyOutput: value,
     );
@@ -39,7 +55,8 @@ class DisplayController extends StateNotifier<DisplayModel> {
   }
 
   void addMemoryList(double value, BuildContext context) {
-    double roundedValue = double.parse(value.toStringAsFixed(1));
+    double roundedValue = double.parse(
+        value % 1 == 0 ? value.toStringAsFixed(0) : value.toStringAsFixed(2));
     state = state.copyWith(
       memory: [...state.memory, roundedValue],
     );
@@ -49,7 +66,8 @@ class DisplayController extends StateNotifier<DisplayModel> {
   }
 
   void addGTList(double value) {
-    double roundedValue = double.parse(value.toStringAsFixed(1));
+    double roundedValue = double.parse(
+        value % 1 == 0 ? value.toStringAsFixed(0) : value.toStringAsFixed(2));
     state = state.copyWith(
       gt: [...state.gt, roundedValue],
     );

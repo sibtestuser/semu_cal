@@ -36,6 +36,9 @@ class ClassController extends StateNotifier<ClassModel> {
           classWidgetList: ClassList.gtClassList,
         );
       case ClassEnum.k:
+        state = state.copyWith(
+          classWidgetList: ClassList.kClassList,
+        );
       case ClassEnum.none:
         state = state.copyWith(
           classWidgetList: [
