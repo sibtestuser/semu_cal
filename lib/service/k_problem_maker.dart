@@ -65,6 +65,8 @@ class KService extends ProblemMaker {
           problem.operand *
           problem.operand;
     }
+    print('firstvaule: ${problem.firstValue}');
+    print('operand: ${problem.operand}');
     problem.basicProblem =
         ' 초기값 $firstValueString 에 $operandString 를 $howmanyString 번 곱하면?';
     problem.advancedProblem =
@@ -103,7 +105,7 @@ class KService extends ProblemMaker {
       problem.x3 = firstValueString;
     }
     problem.basicProblem =
-        '초기값 $firstValueString 에 $operandString 을 $howmanyString 번 곱하면?';
+        '초기값 $firstValueString 에 $operandString 을 $howmanyString 번 나누면?';
     problem.advancedProblem =
         ' (이자율 $operandString)  x$howmanyString년도 가치가 $firstValueString 일때  x0년도 현재가치는?';
     return problem;
