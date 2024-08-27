@@ -56,4 +56,6 @@ class ClassController extends StateNotifier<ClassModel> {
   void makeReset() {
     state = ClassModel();
   }
+
+  ClassModel get getClassModel => state;
 }

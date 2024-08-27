@@ -80,7 +80,7 @@ class _KClass_11State extends ConsumerState<KClass_11> {
           ),
           if (firstani)
             MyAnimatedText(
-              text: '사실 K 반복연산은 최초값이 아닌 적용값을 갖습니다.',
+              text: '사실 K 반복연산은 최초값은 변경이 가능합니다.',
               onFinished: () {
                 setState(() {
                   secondani = true;
@@ -115,16 +115,16 @@ class _KClass_11State extends ConsumerState<KClass_11> {
           const SizedBox(
             height: 3,
           ),
-          if (thirdani)
+          if (fourthani)
             MyAnimatedText(
               text: '우리가 알아본 내용만 알아도 부족하진 않습니다.',
               onFinished: () {
                 setState(() {
-                  fourthani = true;
+                  fifthani = true;
                 });
               },
             ),
-          if (fourthani)
+          if (fifthani)
             MyAnimatedText(
               text: '다음은 문제를 풀며 K 기능에 익훅해지는 시간을 가져봅시다.',
               onFinished: () {

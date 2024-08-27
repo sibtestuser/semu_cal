@@ -1,10 +1,14 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:semu_cal/core/enum/enum.dart';
+import 'package:semu_cal/feature/problem/controller/problemcontroller.dart';
 import 'package:semu_cal/model/test_model.dart';
+import 'package:semu_cal/repository/problem_repository.dart';
 
 final testModelProvider =
     StateNotifierProvider<TestController, TestModel>((ref) {
-  return TestController(ref: ref);
+  return TestController(
+    ref: ref,
+  );
 });
 
 class TestController extends StateNotifier<TestModel> {
@@ -23,4 +27,6 @@ class TestController extends StateNotifier<TestModel> {
   void makeReset() {
     state = TestModel();
   }
+
+  TestModel get getTestModel => state;
 }

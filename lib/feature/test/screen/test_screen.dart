@@ -15,7 +15,7 @@ class TestScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          '테스트',
+          '문제 풀어보기',
         ),
         backgroundColor: Colors.blueGrey[100],
         leading: IconButton(
@@ -36,7 +36,7 @@ class TestScreen extends ConsumerWidget {
                   children: [
                     const Expanded(
                       flex: 1,
-                      child: TestMainPageView(),
+                      child: TestMainPageView(), // 얘가 실제 페이지
                     ),
                     Expanded(
                       flex: 2,

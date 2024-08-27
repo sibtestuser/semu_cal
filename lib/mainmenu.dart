@@ -13,6 +13,7 @@ import 'package:semu_cal/feature/calculator/controller/calculate_controller.dart
 import 'package:semu_cal/feature/calculator/controller/display_controller.dart';
 import 'package:semu_cal/feature/class/controller/class_controller.dart';
 import 'package:semu_cal/feature/class/screen/class_screen.dart';
+import 'package:semu_cal/feature/test/controller/test_controller.dart';
 import 'package:semu_cal/feature/test/screen/test_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -215,7 +216,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                                 onTap: () {
                                   allReset();
                                   ref
-                                      .read(classModelProvider.notifier)
+                                      .read(testModelProvider.notifier)
                                       .setTestType(TestEnum.basic);
                                   ref
                                       .read(classModelProvider.notifier)
@@ -261,7 +262,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                                       .setTestType(TestEnum.advanced);
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => const ClassScreen(),
+                                      builder: (context) => const TestScreen(),
                                     ),
                                   );
                                 },
@@ -365,13 +366,13 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                                   allReset();
                                   ref
                                       .read(classModelProvider.notifier)
-                                      .setClassType(ClassEnum.none);
+                                      .setClassType(ClassEnum.gt);
                                   ref
-                                      .read(classModelProvider.notifier)
+                                      .read(testModelProvider.notifier)
                                       .setTestType(TestEnum.basic);
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => const ClassScreen(),
+                                      builder: (context) => const TestScreen(),
                                     ),
                                   );
                                 },
@@ -403,13 +404,13 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                                   allReset();
                                   ref
                                       .read(classModelProvider.notifier)
-                                      .setClassType(ClassEnum.none);
+                                      .setClassType(ClassEnum.gt);
                                   ref
-                                      .read(classModelProvider.notifier)
+                                      .read(testModelProvider.notifier)
                                       .setTestType(TestEnum.advanced);
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => const ClassScreen(),
+                                      builder: (context) => const TestScreen(),
                                     ),
                                   );
                                 },
@@ -513,13 +514,13 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                                   allReset();
                                   ref
                                       .read(classModelProvider.notifier)
-                                      .setClassType(ClassEnum.none);
+                                      .setClassType(ClassEnum.k);
                                   ref
-                                      .read(classModelProvider.notifier)
+                                      .read(testModelProvider.notifier)
                                       .setTestType(TestEnum.basic);
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => const ClassScreen(),
+                                      builder: (context) => const TestScreen(),
                                     ),
                                   );
                                 },
@@ -551,13 +552,13 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                                   allReset();
                                   ref
                                       .read(classModelProvider.notifier)
-                                      .setClassType(ClassEnum.none);
+                                      .setClassType(ClassEnum.k);
                                   ref
-                                      .read(classModelProvider.notifier)
+                                      .read(testModelProvider.notifier)
                                       .setTestType(TestEnum.advanced);
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => const ClassScreen(),
+                                      builder: (context) => const TestScreen(),
                                     ),
                                   );
                                 },

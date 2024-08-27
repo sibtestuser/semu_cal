@@ -193,9 +193,6 @@ class _MemoryClass_4State extends ConsumerState<MemoryClass_4> {
                     ref
                         .read(displayControllerProvider.notifier)
                         .setTouchButton('x', duration: 5000);
-                    ref
-                        .read(displayControllerProvider.notifier)
-                        .updateTempOutput('x');
 
                     // 다시 0.3초 후에 세 번째 연산을 실행
                     _startTimer(200, () {

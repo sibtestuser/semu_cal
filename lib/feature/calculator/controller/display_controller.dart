@@ -20,16 +20,7 @@ class DisplayController extends StateNotifier<DisplayModel> {
   void updateOutput(String value) {
     if (value == '') value = '0';
     double parsedValue = double.parse(value);
-    // if (parsedValue == 0) {
-    //   if (state.gt.isNotEmpty) {
-    //     for (int i = 0; i < state.gt.length; i++) {
-    //       parsedValue = parsedValue + state.gt[i];
-    //     }
-    //   }
-    // }
-    String formattedValue = parsedValue % 1 == 0
-        ? parsedValue.toStringAsFixed(0)
-        : parsedValue.toStringAsFixed(2);
+    String formattedValue = parsedValue.toString();
     value = formattedValue;
     state = state.copyWith(
       displyOutput: value,

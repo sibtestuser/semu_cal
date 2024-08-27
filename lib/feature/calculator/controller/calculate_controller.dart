@@ -145,14 +145,23 @@ class CalculateController extends StateNotifier<Calmodel> {
     switch (value) {
       case functionEnum.mplus:
         addMemory(value, context);
+        state.firstOperand = '0';
+        state.workingFirstOperand = true;
+        state.secondOperand = '0';
         break;
       case functionEnum.mminus:
         addMemory(value, context);
+        state.firstOperand = '0';
+        state.workingFirstOperand = true;
+        state.secondOperand = '0';
         break;
       case functionEnum.gt:
         // gtButtonPressed();
         break;
       case functionEnum.mr:
+        state.firstOperand = '0';
+        state.workingFirstOperand = true;
+        state.secondOperand = '0';
         // mrButtonPressed();
         break;
       case functionEnum.k:
@@ -222,8 +231,7 @@ class CalculateController extends StateNotifier<Calmodel> {
       if (state.k != operationEnum.none) {
         final displaynum =
             double.parse(_displaaycontroller.state.displyOutput) * -1;
-        print('Original value: ${_displaaycontroller.state.displyOutput}');
-        print('Converted value: $displaynum');
+
         _displaaycontroller.addMemoryList(displaynum, context);
         return;
       }
