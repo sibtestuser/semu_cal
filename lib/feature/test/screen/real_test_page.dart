@@ -68,7 +68,7 @@ class _RealTestViewWidgetState extends ConsumerState<RealTestViewWidget> {
               test.problem == '' ? '다음문제 버튼을 눌러주세요' : test.problem,
               style: problemStyle.copyWith(height: 1.1),
             ),
-            if (test.problemWidget != null)
+            if (classType == ClassEnum.k)
               SizedBox(
                 height: 10,
               ),
